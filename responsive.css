@@ -138,3 +138,10 @@ footer{height:auto;min-height:60px;flex-wrap:wrap;line-height:1.6}
 .status-summary{min-width:0}.status-cell{min-width:145px}
 @media(max-width:960px){.row-status{display:block;margin-top:12px}.row-status .correspondence-badge{display:inline-block}}
 @media(max-width:640px){.table-wrap td>.row-status{grid-column:2;min-width:0;margin-top:4px}.table-wrap td.status-cell{display:none}.correspondence-status{padding:14px}.correspondence-status>.hint{flex-basis:100%}}
+
+/* Separate delivery status from the reply requirement */
+.status-chips{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px;max-width:100%;vertical-align:middle;min-width:0}
+.status-chip{display:inline-flex;align-items:center;gap:6px}.status-chip::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+.b-purple{color:#6052a1;background:#f0edfb}.requirement-chip{font-weight:600;border:1px solid #e6e0f6;font-size:10px}.requirement-chip.b-gray{border-color:#e6e8ef}
+.status-chips .correspondence-badge{margin:0;line-height:1.5}
+@media(max-width:640px){.table-wrap td>.status-chips{grid-column:2}.row-status .status-chips{display:flex}.status-summary .status-chips{display:flex}}
