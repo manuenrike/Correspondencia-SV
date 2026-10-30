@@ -21,9 +21,11 @@ function currentActor(){
 function actorMarkup(actor){
   return `<small class="audit-actor"><b>${esc(actor.userName)}</b> · ${esc(actor.institutionName)}<br>Ventanilla: ${esc(actor.windowName)}</small>`;
 }
-function eventMarkup(event){
+function eventMarkup(event,record){
+  const isSend=/^Correspondencia creada y enviada/.test(event.text);
+  const actor=event.actor||(isSend&&record?(record.sentBy||{userName:record.user||'Usuario no registrado',institutionName:inst(record.from)?.name||'Institución no disponible',windowName:win(record.from,record.fromWindow)?.name||'Ventanilla no disponible'}):null);
   const legacyDecision=!event.actor&&/^(Rechazad|Recepción aceptada|Correspondencia recibida)/i.test(event.text);
-  return `<p>${esc(event.text)}${event.actor?actorMarkup(event.actor):legacyDecision?'<small>Usuario no registrado en este evento anterior</small>':''}<small>${date(event.at)}</small></p>`;
+  return `<p>${esc(isSend?'Correspondencia creada y enviada':event.text)}${actor?actorMarkup(actor):legacyDecision?'<small>Usuario no registrado en este evento anterior</small>':''}<small>${date(event.at)}</small></p>`;
 }
 function canRejectCorrespondence(record){
   return record.status==='pending'?record.to===active:record.kind==='institucional'&&record.status==='accepted'&&[record.from,record.to].includes(active);
