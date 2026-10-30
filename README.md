@@ -8,6 +8,10 @@ La interfaz usa tarjetas en lugar de tablas para correspondencias, borradores, i
 
 Los componentes visuales están en `ui.js` y los estilos del rediseño en `design.css`, sobre los estilos base y adaptables. Los datos, los documentos y las reglas de recepción, rechazo, chat y QR conservan su funcionamiento
 
+La presentación compacta usa `refinement.css`: azul suave, tarjetas de menor altura, diálogos centrados, notificaciones con cierre y un menú de cuenta con nombre y ventanilla. El menú permite cambiar institución y usuario y acceder a los respaldos
+
+El envío se organiza mediante `send-flow.js` en Información, Destino, Documentos y Revisión. Cada paso valida sus campos; la correspondencia ciudadana también verifica identidad y descargo. Puedes retroceder sin perder datos o guardar y salir. El borrador conserva el paso actual. El QR se añade únicamente al confirmar el envío
+
 ## Respaldo en ficheros locales
 
 Pulsa **Respaldo** en el encabezado y luego **Conectar carpeta**. Selecciona una carpeta exclusiva y autoriza la escritura. El sistema guarda automáticamente `informacion.json` y una subcarpeta `documentos` con todos los PDF, incluyendo originales y copias con QR. También incluye borradores y respuestas pendientes. Puedes usar **Guardar ahora** y esperar el estado **Respaldo guardado** antes de cerrar

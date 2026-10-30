@@ -10,6 +10,7 @@ function refreshSessionUser(){
   if(selected)localStorage.setItem('csv-user-'+active,selected.key);
   const avatar=document.querySelector('.avatar.user');
   if(avatar)avatar.textContent=selected?selected.user.name.split(/\s+/).slice(0,2).map(part=>part[0]).join(''):'—';
+  refreshAccountPresentation(selected);
   select.onchange=()=>{localStorage.setItem('csv-user-'+active,select.value);refreshSessionUser()};
 }
 function currentActor(){

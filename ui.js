@@ -1,4 +1,6 @@
 const uiPaths={
+ alert:'<path d="m12 3 10 18H2Z"/><path d="M12 9v4m0 3v1"/>',
+ info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v1"/>',
  mail:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/>',
  arrow:'<path d="M5 12h14m-6-6 6 6-6 6"/>',
  building:'<path d="m3 9 9-6 9 6M4 21h16M6 10v8m6-8v8m6-8v8M3 9h18"/>',
