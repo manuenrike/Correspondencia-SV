@@ -2,9 +2,11 @@
 
 Abre `index.html` en Edge o Chrome para usar la aplicación sin instalación
 
-## Diseño adaptable
+## Diseño y adaptación
 
-La interfaz se ajusta a escritorio, tabletas y teléfonos. En pantallas de hasta 640 px las tablas muestran filas con etiquetas, conservando buscadores y acciones. La navegación móvil se desplaza horizontalmente; los formularios pasan a una columna, los modales utilizan la altura disponible y los documentos largos se ajustan sin desplazar la página lateralmente. Las acciones en móvil tienen un área táctil mínima de 44 px. Los estilos adaptables están en `responsive.css` y las etiquetas de tablas dinámicas se actualizan mediante `responsive.js`
+La interfaz usa tarjetas en lugar de tablas para correspondencias, borradores, instituciones, ventanillas y usuarios. Cada expediente muestra su asunto, estado, requisito de respuesta, destino, fecha y adjuntos. Se conservan los filtros y las acciones existentes. Las tarjetas pasan a una columna en teléfonos, los formularios y modales se adaptan a la pantalla y las animaciones respetan la preferencia de movimiento reducido
+
+Los componentes visuales están en `ui.js` y los estilos del rediseño en `design.css`, sobre los estilos base y adaptables. Los datos, los documentos y las reglas de recepción, rechazo, chat y QR conservan su funcionamiento
 
 ## Respaldo en ficheros locales
 
