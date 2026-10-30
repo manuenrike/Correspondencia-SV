@@ -2,6 +2,10 @@
 
 Abre `index.html` en Edge o Chrome para usar la aplicación sin instalación
 
+## Diseño adaptable
+
+La interfaz se ajusta a escritorio, tabletas y teléfonos. En pantallas de hasta 640 px las tablas muestran filas con etiquetas, conservando buscadores y acciones. La navegación móvil se desplaza horizontalmente; los formularios pasan a una columna, los modales utilizan la altura disponible y los documentos largos se ajustan sin desplazar la página lateralmente. Las acciones en móvil tienen un área táctil mínima de 44 px. Los estilos adaptables están en `responsive.css` y las etiquetas de tablas dinámicas se actualizan mediante `responsive.js`
+
 ## Respaldo en ficheros locales
 
 Pulsa **Respaldo** en el encabezado y luego **Conectar carpeta**. Selecciona una carpeta exclusiva y autoriza la escritura. El sistema guarda automáticamente `informacion.json` y una subcarpeta `documentos` con todos los PDF, incluyendo originales y copias con QR. También incluye borradores y respuestas pendientes. Puedes usar **Guardar ahora** y esperar el estado **Respaldo guardado** antes de cerrar

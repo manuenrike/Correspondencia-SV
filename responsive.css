@@ -1,0 +1,132 @@
+/* Shared containment: long names and documents must wrap inside their column */
+html{max-width:100%;scrollbar-gutter:stable}
+body{min-width:280px}
+body:has(.overlay:not([hidden])){overflow:hidden}
+.shell,main,.panel,.grid,.field,.page-head>div,.panel-head>div,.welcome>div,.workspace>div,.dialog-head>div,.stat{min-width:0}
+.shell>header{height:auto;min-height:83px;gap:16px;padding-block:16px;flex-wrap:wrap}
+.header-right{min-width:0;max-width:100%;flex-wrap:wrap;gap:12px;align-items:center}
+.header-right label{min-width:0;flex:1 1 140px}
+.header-right select{width:100%;max-width:230px;overflow:hidden;text-overflow:ellipsis}
+.shell>header>span{flex:1 1 180px;line-height:1.6}
+aside{overflow-y:auto}
+.brand>span:last-child{min-width:0}
+.workspace b,.workspace small{overflow-wrap:anywhere}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.field input:not([type=checkbox]),.field select,.field textarea{width:100%;min-width:0;max-width:100%}
+.check{line-height:1.5}.check input{flex-shrink:0}
+.file-row{gap:12px;min-width:0}
+.file-row>span:first-child:not(.document-actions){min-width:0;overflow-wrap:anywhere}
+.file-row>div{flex-shrink:0;display:flex;align-items:center;gap:6px}
+.file-row .document-actions{flex-shrink:0;white-space:nowrap}
+.message header{gap:10px;flex-wrap:wrap;min-width:0;line-height:1.7}
+.message p,.message h3,.notice,.timeline,.dialog-head h2,.page-head h1,.field b,.field span{overflow-wrap:anywhere}
+.dialog{height:100vh;height:100dvh;overscroll-behavior:contain;max-width:100%;min-width:0;padding-bottom:max(30px,env(safe-area-inset-bottom))}
+.dialog-head{gap:14px}.close{flex-shrink:0}
+.dialog .inline{flex-wrap:wrap}
+.form-actions,.confirmation-actions{flex-wrap:wrap}
+.btn{white-space:normal;text-align:center}
+.table-wrap{width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+.table-wrap table{min-width:640px}
+.table-footer{gap:12px;flex-wrap:wrap}
+.stepbar span{min-width:0;line-height:1.6}
+.doc-view{display:block;min-height:260px;height:65vh;height:65dvh;max-width:100%}
+footer{height:auto;min-height:60px;flex-wrap:wrap;line-height:1.6}
+.confirmation-dialog{max-height:calc(100dvh - 32px);overflow-y:auto}
+@media(max-width:1200px){
+ .shell>header{padding-inline:24px}.shell>header>span{flex-basis:100%}
+ .header-right{width:100%}.header-right label{flex-grow:1}.header-right select{max-width:100%}
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:960px){
+ aside{width:200px;padding:22px 12px}.shell{margin-left:200px}
+ nav button{padding:12px 8px;gap:8px}nav button span{font-size:11px}
+ .brand{font-size:14px;gap:8px}.logo{width:36px;height:38px;flex-shrink:0}
+ main{padding:24px}.page-head{align-items:flex-start;flex-wrap:wrap}
+ .welcome{padding:24px}.welcome .art{margin:0 10px;font-size:44px}
+ .panel-head{gap:12px;flex-wrap:wrap}.toolbar .search{flex-basis:100%}
+ .dialog{width:min(760px,100%)}.dialog.wide{width:min(900px,100%)}
+}
+@media(max-width:760px){
+ html{scrollbar-gutter:auto}
+ aside{position:static;width:100%;padding:16px;border-right:0;border-bottom:1px solid var(--line);overflow:visible}
+ .brand{font-size:17px}.brand .logo{width:40px;height:42px}
+ .shell{margin-left:0;width:100%}
+ nav{display:flex;gap:8px;overflow-x:auto;margin-top:16px;padding-bottom:5px;overscroll-behavior-x:contain}
+ nav button{width:auto;flex:0 0 auto;min-width:0;margin:0;min-height:44px;padding:11px 13px;white-space:nowrap}
+ nav button span{font-size:12px}nav i{margin-left:3px}
+ .shell>header{padding:14px 16px;min-height:0}
+ .shell>header>span{display:none}
+ .header-right{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px 12px}
+ .header-right>.btn{grid-column:1;grid-row:1;justify-self:start;min-height:40px}
+ .header-right>.avatar{grid-column:2;grid-row:1;justify-self:end}
+ .header-right label{font-size:11px;line-height:1.5}
+ .header-right select{border:1px solid var(--line);padding:10px 8px;margin-top:5px;border-radius:7px;min-height:44px;font-size:12px}
+ main{padding:24px 16px;min-height:50vh}
+ .page-head{gap:16px;margin-bottom:22px}.page-head>.btn{min-height:44px}
+ .page-head h1{font-size:25px;line-height:1.25;letter-spacing:-.6px}
+ .page-head p{font-size:13px}
+ .stats{gap:12px}.stat{padding:16px}.stat strong{font-size:28px}
+ .stat .stat-icon{font-size:17px;padding:8px}.stat label{line-height:1.6}
+ .welcome{padding:24px}.welcome h2{font-size:19px}.welcome .art{display:none}
+ .panel-head{padding:20px 16px}.toolbar{padding:0 16px 18px;gap:10px}
+ .toolbar .search{min-width:0;flex-basis:100%}.toolbar>select{flex:1;min-width:0}
+ .tabs{gap:18px;overflow-x:auto}.tabs button{white-space:nowrap;min-height:44px}
+ .dialog,.dialog.wide{width:100%;padding:22px 16px max(22px,env(safe-area-inset-bottom))}
+ .dialog-head h2{font-size:22px;line-height:1.35}.dialog-head p{font-size:12px}
+ .close{width:40px;height:40px;display:grid;place-items:center}
+ .form-section{padding:18px 16px}.grid{grid-template-columns:minmax(0,1fr);gap:18px}
+ .field.full{grid-column:auto}.field{font-size:12px}
+ input,select,textarea{font-size:16px;min-height:44px}
+ input[type=checkbox]{min-height:0;width:18px;height:18px;padding:0}
+ input[type=file]{font-size:12px;white-space:normal;max-width:100%;padding:10px 6px}
+ .drop{padding:18px 12px}.drop input{width:100%;font-size:12px}
+ .requires-response-field>span[aria-hidden]{display:none}
+ .requires-response-field .check{min-height:44px}
+ .check{font-size:13px}
+ .form-actions .btn{min-height:44px;flex:1 1 140px}
+ .stepbar{gap:6px}.stepbar span{font-size:10px;padding:10px 8px}
+ .message{padding:16px}.message header{padding:0;height:auto;min-height:0}
+ .message header>span{font-size:10px}.message header>b{font-size:12px}
+ .message p{font-size:13px}.message .badge{white-space:normal;line-height:1.6}
+ .file-row{padding:12px 10px;align-items:flex-start;flex-wrap:wrap}
+ .file-row>span:first-child:not(.document-actions){flex:1 1 150px;line-height:1.65}
+ .file-row>div,.file-row>.document-actions{margin-left:auto;align-self:center}
+ .document-action,.icon-btn{min-width:44px;min-height:44px}
+ .document-actions{gap:6px}.document-action svg{width:19px;height:19px}
+ .file-row>.document-actions{flex:0 0 auto}
+ .timeline{padding-left:20px;margin-inline:7px}.timeline p:before{left:-26px}
+ .notice{font-size:12px}.hint{font-size:11px}
+ .doc-view{height:68vh;height:68dvh;min-height:300px}
+ .confirmation-dialog{padding:22px;max-width:calc(100vw - 24px)}
+ .confirmation-actions .btn{flex:1 1 120px;min-height:44px}
+ footer{padding:18px 16px;gap:10px}footer b{margin-left:auto}
+}
+/* Tables become labelled rows on phones; no horizontal page scrolling */
+@media(max-width:640px){
+ .table-wrap table{min-width:0;width:100%}
+ .table-wrap thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ .table-wrap table,.table-wrap tbody{display:block}
+ .table-wrap tbody tr{display:block;padding:10px 16px;border-bottom:1px solid var(--line)}
+ .table-wrap tbody tr:last-child{border-bottom:0}
+ .table-wrap td{display:grid;grid-template-columns:minmax(80px,30%) minmax(0,1fr);gap:12px;align-items:start;padding:9px 0;border:0;overflow-wrap:anywhere;font-size:12px;text-align:left}
+ .table-wrap td::before{content:attr(data-label);font-size:9px;font-weight:600;letter-spacing:.3px;color:var(--muted);line-height:1.7}
+ .table-wrap td>small{grid-column:2;margin:0}
+ .table-wrap td .actions{flex-wrap:wrap}
+ .table-wrap td .badge{white-space:normal;line-height:1.6;justify-self:start;width:fit-content}
+ .table-wrap td.table-empty-cell{display:block;padding:24px 0!important}
+ .table-wrap td.table-empty-cell::before{display:none}
+ .table-wrap td .institution-icon{display:none}
+ .page-head>.btn{width:100%}
+ .toolbar>.btn,.toolbar>select{flex:1 1 130px}
+ .dialog .panel-head .btn{width:100%}
+}
+@media(max-width:360px){
+ main{padding-inline:12px}.dialog{padding-inline:12px}.header-right{grid-template-columns:minmax(0,1fr)}
+ .header-right>.avatar{grid-column:1;grid-row:1}.header-right>.btn{justify-self:start}
+ .stats{gap:8px}.stat{padding:12px}.stat .stat-icon{display:none}
+ .stepbar{flex-direction:column}.stepbar span{padding:8px 10px}
+ .form-section,.message{padding:14px 12px}
+}
+@media(max-height:500px) and (orientation:landscape){
+ .dialog{padding-top:14px}.dialog-head{margin-bottom:16px}.doc-view{height:65dvh;min-height:180px}
+}
