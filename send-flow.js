@@ -8,7 +8,7 @@ function mountSendFlow(kind){
  const stepper=dialog.querySelector('.stepbar');stepper.className='send-stepper';
  stepper.innerHTML=labels.map((label,index)=>`<button type="button" data-step="${index}" ${index===3?'disabled':''}><span>${index+1}</span>${label}</button>`).join('');
  const footer=form.querySelector(':scope > .form-actions');footer.className='form-actions send-footer';
- footer.innerHTML=`<span class="send-save-status">${uiIcon('check')} Borrador automático</span><button type="button" class="btn" data-back>Anterior</button><button type="button" class="btn" data-save>Guardar y salir</button><button type="submit" class="btn primary" data-next>Continuar ${uiIcon('arrow')}</button>`;
+ footer.innerHTML=`<span class="send-save-status">${uiIcon('check')} Guardado automático</span><button type="button" class="btn" data-back>Anterior</button><button type="submit" class="btn primary" data-next>Continuar ${uiIcon('arrow')}</button>`;
  const originalSubmit=form.onsubmit;
  let current=Math.min(2,Math.max(0,Number(editing.sendStep)||0));
  function showStep(index,focus=false){
@@ -31,7 +31,6 @@ function mountSendFlow(kind){
   return true;
  }
  footer.querySelector('[data-back]').onclick=()=>showStep(Math.max(0,current-1),true);
- footer.querySelector('[data-save]').onclick=closeModal;
  stepper.querySelectorAll('[data-step]').forEach(button=>button.onclick=()=>{const index=Number(button.dataset.step);if(index<=current)showStep(index,true)});
  form.onsubmit=event=>{
   event.preventDefault();storeDraft();
