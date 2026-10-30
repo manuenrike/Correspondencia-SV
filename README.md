@@ -6,9 +6,7 @@ Abre `index.html` en Edge o Chrome para usar la aplicación sin instalación
 
 La interfaz usa tarjetas en lugar de tablas para correspondencias, borradores, instituciones, ventanillas y usuarios. Cada expediente muestra su asunto, estado, requisito de respuesta, destino, fecha y adjuntos. Se conservan los filtros y las acciones existentes. Las tarjetas pasan a una columna en teléfonos, los formularios y modales se adaptan a la pantalla y las animaciones respetan la preferencia de movimiento reducido
 
-Los componentes visuales están en `ui.js` y los estilos del rediseño en `design.css`, sobre los estilos base y adaptables. Los datos, los documentos y las reglas de recepción, rechazo, chat y QR conservan su funcionamiento
-
-La presentación compacta usa `refinement.css`: azul suave, tarjetas de menor altura, diálogos centrados, notificaciones con cierre y un menú de cuenta con nombre y ventanilla. El menú permite cambiar institución y usuario y acceder a los respaldos
+El estándar visual sigue [Dock](docs/design-system.md). `layout.css` contiene la distribución sin colores y `theme.css` es la única paleta activa. Se utiliza fondo crema, texto oscuro, botones de cobalto y una sola familia tipográfica. Los estilos históricos ya no se cargan. Se mantienen tarjetas compactas, adaptación móvil y movimiento reducido
 
 El envío se organiza mediante `send-flow.js` en tres pasos: Información, Destino y documentos, y Revisión. Cada paso valida sus campos; la correspondencia ciudadana también verifica identidad y descargo. Puedes retroceder sin perder datos o cerrar la ventana; el guardado del borrador es automático. El borrador conserva el paso actual. La verificación de identidad muestra un indicador de consulta y descarta resultados pendientes si se modifica el número o se cierra el formulario. El QR se añade únicamente al confirmar el envío
 
