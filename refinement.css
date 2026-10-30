@@ -97,3 +97,11 @@ nav button.active{color:#1313f4;background:#ededff}nav button.active:after{backg
 .toast-symbol{color:#3737d4;background:#efefff}.toast-success .toast-symbol{color:#568e73;background:#e7f5ed}.toast-error .toast-symbol{color:#b36c74;background:#fae9ec}
 
 .send-stepper{grid-template-columns:repeat(3,minmax(0,1fr))}
+/* Compact confirmations */
+.confirmation-dialog{width:370px;max-width:calc(100vw - 28px);padding:19px 20px;border-radius:14px}
+.confirmation-top{margin-bottom:13px}.confirmation-icon{width:33px;height:33px;border-radius:10px;font-size:19px}
+.confirmation-top .close{width:27px;height:27px;min-width:27px;min-height:27px;font-size:17px;border-radius:8px}
+.confirmation-dialog .eyebrow{font-size:7px;letter-spacing:1.3px}.confirmation-dialog h2{font-size:17px;line-height:1.4;margin:7px 0 10px;letter-spacing:-.3px;color:#415f90}
+.confirmation-dialog p{font-size:11px;line-height:1.7;margin:0 0 16px;color:#627ba0}
+.confirmation-actions{gap:8px;padding-top:13px}.confirmation-actions .btn{min-height:34px;padding:8px 11px;font-size:10px;flex:0 1 auto;border-radius:8px}
+@media(max-width:540px){.confirmation-dialog{width:350px;padding:18px;border-radius:13px}.confirmation-dialog h2{font-size:17px}.confirmation-dialog p{font-size:11px}.confirmation-actions .btn{min-height:40px;font-size:10px;padding:9px 11px}}
