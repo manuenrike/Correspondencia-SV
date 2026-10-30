@@ -130,3 +130,11 @@ footer{height:auto;min-height:60px;flex-wrap:wrap;line-height:1.6}
 @media(max-height:500px) and (orientation:landscape){
  .dialog{padding-top:14px}.dialog-head{margin-bottom:16px}.doc-view{height:65dvh;min-height:180px}
 }
+
+/* Keep correspondence status visible without scrolling a table sideways */
+.correspondence-badge{font-size:11px;line-height:1.5;padding:7px 10px;white-space:normal;overflow-wrap:anywhere;max-width:100%;font-weight:700}
+.row-status{display:none}.row-status-label{font-size:10px;font-weight:600;color:#666b86;display:block;margin-bottom:6px;line-height:1.5}
+.correspondence-status{padding:16px;background:white;border:1px solid var(--line);border-radius:10px;margin-bottom:20px;gap:14px;flex-wrap:wrap}
+.status-summary{min-width:0}.status-cell{min-width:145px}
+@media(max-width:960px){.row-status{display:block;margin-top:12px}.row-status .correspondence-badge{display:inline-block}}
+@media(max-width:640px){.table-wrap td>.row-status{grid-column:2;min-width:0;margin-top:4px}.table-wrap td.status-cell{display:none}.correspondence-status{padding:14px}.correspondence-status>.hint{flex-basis:100%}}
