@@ -81,3 +81,17 @@ nav button{color:#5d708f}nav button:hover{color:#3e5e90;background:#edf3fc}nav b
 @media(max-width:540px){.dialog.is-composer .dialog-head h2{font-size:20px}.is-composer .form-section{padding:15px 14px}.identity-fields{grid-template-columns:minmax(0,1fr);gap:13px;margin-top:14px}.identity-fields .identity-verify{grid-column:auto;justify-self:stretch}.identity-notice .notice-secondary{font-size:9px}.sender-context>b{display:inline;margin-right:6px}.sender-person{margin-top:2px}.send-footer{padding-inline:16px}.send-stepper button{font-size:8px}.field-label>.optional{font-size:9px}.verification-result{align-items:flex-start;padding:9px 10px}.verification-result>svg,.verification-result>.identity-spinner{margin-top:2px}}
 @media(max-width:360px){.send-save-status{font-size:7px;gap:3px}.send-save-status svg{width:10px;height:10px}.send-footer .btn{font-size:8px;padding:9px 10px;gap:5px}.send-footer .btn svg{width:12px;height:12px}}
 @media(prefers-reduced-motion:reduce){.identity-spinner,.verification-result{animation:none}.identity-spinner{border-top-color:#4c74ac}}
+/* Brand accent */
+:root{--navy:#1313f4;--accent:#eaeaff}
+.brand,.brand b,.logo{color:#1313f4}.logo{background:#ededff;border-color:#dcdcff}
+.primary,.btn.primary,.directory-actions>.primary{background:#1313f4;border-color:#1313f4;color:#fff}.primary:hover,.btn.primary:hover{background:#1010d2;border-color:#1010d2}
+nav button.active{color:#1313f4;background:#ededff}nav button.active:after{background:#1313f4}nav button:hover{color:#2929cb;background:#f2f2ff}
+.workspace{background:#f3f3ff;border-color:#e3e3fb}.workspace .avatar,.account-menu .avatar.user{background:#e8e8ff;color:#2828c9}
+.hero-primary{color:#1313f4;border-color:#cfcfff;background:#fff}.hero-primary:hover{background:#f5f5ff}.hero-secondary{color:#3030bd;background:#e0e0ff}.hero-secondary:hover{background:#d6d6ff}
+.welcome{background:linear-gradient(110deg,#e5e5ff,#f0f0ff);border-color:#d8d8ff}.welcome h2{color:#2020a8}.hero-label{color:#6464b9}.welcome p{color:#66668e}
+.tabs button.active{color:#1313f4}.tabs{background:#e8e8f5}.toolbar input:focus,.field input:focus,.field select:focus,.field textarea:focus{border-color:#8b8bfa;box-shadow:0 0 0 3px #efefff}
+.card-title:hover,.card-open,.document-action,.directory-actions>.btn:not(.primary){color:#3030c4}.icon-btn:hover,.document-action:hover{color:#1313f4;background:#f0f0ff}
+.b-blue{color:#2929b9;background:#ededff}.stat .stat-icon{color:#4141cc;background:#ededff}.type-label svg{color:#6565c5}
+.send-stepper button.current{color:#1313f4;background:#efefff}.send-stepper button.current>span,.review-heading>span{background:#1313f4;border-color:#1313f4;color:#fff}.send-stepper button.complete{color:#6262b9}
+.check input{accent-color:#1313f4}.identity-verify{color:#3030bd;border-color:#d0d0f5;background:#f7f7ff}.identity-verify:hover{background:#ededff}.identity-verify:disabled{color:#6262b9;background:#f0f0ff;border-color:#dcdcf9}.identity-spinner{border-color:#cecefa;border-top-color:#1313f4}
+.toast-symbol{color:#3737d4;background:#efefff}.toast-success .toast-symbol{color:#568e73;background:#e7f5ed}.toast-error .toast-symbol{color:#b36c74;background:#fae9ec}
