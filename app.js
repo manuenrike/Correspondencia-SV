@@ -24,7 +24,7 @@ $$('nav button').forEach(b=>b.onclick=()=>{page=b.dataset.page;box='all';query='
 function status(r){if(r.status==='rejected')return'Rechazado';if(r.status==='accepted')return'Recibido';return r.from===active?'Enviado':'Pendiente recepción'}
 function badge(r){
  const label=status(r),color=r.status==='accepted'?'b-green':r.status==='rejected'?'b-red':r.from===active?'b-blue':'b-yellow';
- const requirement=r.kind==='institucional'&&r.status!=='rejected'?(correspondenceRequiresReply(r)?'Requiere respuesta':'No requiere respuesta'):'';
+ const requirement=r.kind==='institucional'&&r.status!=='rejected'&&correspondenceRequiresReply(r)?'Requiere respuesta':'';
  return `<span class="status-chips" role="group" aria-label="${esc(label+(requirement?', '+requirement:''))}"><span class="badge correspondence-badge status-chip ${color}">${esc(label)}</span>${requirement?`<span class="badge correspondence-badge requirement-chip ${correspondenceRequiresReply(r)?'b-purple':'b-gray'}">${requirement}</span>`:''}</span>`;
 }
 function head(title,desc,action=''){return`<div class="page-head"><div><div class="eyebrow">CORRESPONDENCIA SV</div><h1>${title}</h1><p>${desc}</p></div>${action}</div>`}

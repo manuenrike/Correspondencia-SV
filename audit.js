@@ -30,7 +30,7 @@ function eventMarkup(event,record){
 function canRejectCorrespondence(record){
   return record.status==='pending'?record.to===active:record.kind==='institucional'&&record.status==='accepted'&&[record.from,record.to].includes(active);
 }
-function responseRequirementMarkup(value){return `<span class="badge ${value?'b-yellow':'b-gray'}">${value?'Requiere respuesta':'No requiere respuesta'}</span>`}
+function responseRequirementMarkup(value){return value?'<span class="badge b-purple">Requiere respuesta</span>':''}
 function registerDecision(record,action,reason=''){
   const actor=currentActor();
   if(action==='accepted'?(record.to!==actor.institutionId||record.status!=='pending'):!canRejectCorrespondence(record))return null;
