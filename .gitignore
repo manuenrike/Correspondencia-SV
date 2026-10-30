@@ -1,0 +1,19 @@
+# Local backups and citizen documents
+informacion.json
+documentos/
+respaldos/
+backups/
+*.pdf
+*.zip
+*.bak
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+.aws/
+.codex/
+.agents/
+node_modules/
+.DS_Store
+Thumbs.db
