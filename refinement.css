@@ -95,3 +95,5 @@ nav button.active{color:#1313f4;background:#ededff}nav button.active:after{backg
 .send-stepper button.current{color:#1313f4;background:#efefff}.send-stepper button.current>span,.review-heading>span{background:#1313f4;border-color:#1313f4;color:#fff}.send-stepper button.complete{color:#6262b9}
 .check input{accent-color:#1313f4}.identity-verify{color:#3030bd;border-color:#d0d0f5;background:#f7f7ff}.identity-verify:hover{background:#ededff}.identity-verify:disabled{color:#6262b9;background:#f0f0ff;border-color:#dcdcf9}.identity-spinner{border-color:#cecefa;border-top-color:#1313f4}
 .toast-symbol{color:#3737d4;background:#efefff}.toast-success .toast-symbol{color:#568e73;background:#e7f5ed}.toast-error .toast-symbol{color:#b36c74;background:#fae9ec}
+
+.send-stepper{grid-template-columns:repeat(3,minmax(0,1fr))}

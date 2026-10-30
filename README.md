@@ -10,7 +10,7 @@ Los componentes visuales están en `ui.js` y los estilos del rediseño en `desig
 
 La presentación compacta usa `refinement.css`: azul suave, tarjetas de menor altura, diálogos centrados, notificaciones con cierre y un menú de cuenta con nombre y ventanilla. El menú permite cambiar institución y usuario y acceder a los respaldos
 
-El envío se organiza mediante `send-flow.js` en Información, Destino, Documentos y Revisión. Cada paso valida sus campos; la correspondencia ciudadana también verifica identidad y descargo. Puedes retroceder sin perder datos o cerrar la ventana; el guardado del borrador es automático. El borrador conserva el paso actual. La verificación de identidad muestra un indicador de consulta y descarta resultados pendientes si se modifica el número o se cierra el formulario. El QR se añade únicamente al confirmar el envío
+El envío se organiza mediante `send-flow.js` en tres pasos: Información, Destino y documentos, y Revisión. Cada paso valida sus campos; la correspondencia ciudadana también verifica identidad y descargo. Puedes retroceder sin perder datos o cerrar la ventana; el guardado del borrador es automático. El borrador conserva el paso actual. La verificación de identidad muestra un indicador de consulta y descarta resultados pendientes si se modifica el número o se cierra el formulario. El QR se añade únicamente al confirmar el envío
 
 ## Respaldo en ficheros locales
 
