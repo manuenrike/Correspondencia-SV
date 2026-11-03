@@ -150,3 +150,7 @@ footer{background:var(--color-pure-white);color:var(--color-slate-gray);border-t
 @media(max-width:540px){.dialog,.dialog.wide{border-radius:0}.send-footer{border-radius:0}}
 @media(prefers-reduced-motion:reduce){.identity-spinner{animation:none}}
 .upload-icon{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:var(--radius-icons);background:var(--color-pure-white);color:var(--color-ink-charcoal);border:1px solid var(--color-hairline)}.upload-icon svg{width:18px;height:18px}
+
+/* Phase 1: explicit keyboard focus and textual validation. */
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--color-electric-cobalt);outline-offset:3px}
+.field-error{display:block;font-weight:600;margin-top:8px}

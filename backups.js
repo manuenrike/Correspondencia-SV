@@ -46,7 +46,7 @@ async function restoreBackup(){try{
  for(const [key,value] of payload.replyDrafts||[])replyDrafts.set(key,{...value,busy:false});
  persistReplyDrafts();
  if(!db.institutions.some(i=>i.id===active))active=db.institutions[0]?.id||'I1';
- localStorage.setItem('csv-active',active);session();$('#modal').hidden=true;render();toast('Respaldo restaurado correctamente');
+ localStorage.setItem('csv-active',active);session();$('#modal').hidden=true;render();deactivateModal($('#modal'));toast('Respaldo restaurado correctamente');
  }catch(error){if(error.name!=='AbortError')toast('No se pudo restaurar: '+error.message)}
 }
 // The handle is remembered; browsers may request permission again on the next visit

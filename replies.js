@@ -15,7 +15,7 @@ function replyDraft(record) {
 function replyComposer() {
   return `<form id="replyForm" class="form-section"><h3>Responder en esta conversación</h3><label class="check"><input type="checkbox" name="requires" value="true">Requiere respuesta</label><p class="hint">Desmarca la casilla si no requiere respuesta</p>
     <label class="field"><span class="field-label">Mensaje <span class="optional">Opcional si adjuntas documentos</span></span><textarea name="text" maxlength="3000" placeholder="Escribe tu respuesta"></textarea></label>
-    <div class="drop" style="margin-top:18px"><p>Adjuntar documentos a la respuesta</p><div class="hint">Hasta 5 archivos PDF · máximo 50 MB por archivo</div><input id="replyFiles" type="file" accept="application/pdf,.pdf" multiple></div>
+    <div class="drop" style="margin-top:18px"><p>Adjuntar documentos a la respuesta</p><div class="hint">Hasta 5 archivos PDF · máximo 50 MB por archivo</div><input id="replyFiles" aria-label="Adjuntar PDF a la respuesta" type="file" accept="application/pdf,.pdf" multiple></div>
     <div id="replyFileList"></div><div class="form-actions"><button id="sendReply" class="btn primary">Enviar respuesta ↗</button></div></form>`;
 }
 function bindReplyComposer(record) {

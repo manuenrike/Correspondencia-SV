@@ -2,6 +2,14 @@
 
 Abre `index.html` en Edge o Chrome para usar la aplicación sin instalación
 
+## Publicación en Hostinger mediante GitHub
+
+El sitio es estático: el punto de entrada es `index.html` en la raíz del repositorio. No requiere compilación, Node.js ni instalación de dependencias en el servidor. Publica los archivos de la raíz y conserva la carpeta `vendor/` con las bibliotecas PDF y QR, además de `modal-accessibility.js`.
+
+En la conexión Git de Hostinger, utiliza este repositorio y la rama `main`. Después de enviar los cambios a GitHub, ejecuta el despliegue desde Hostinger si la conexión no tiene despliegue automático habilitado. Mantén HTTPS habilitado para las funciones de acceso a carpetas del navegador. Las versiones de los recursos modificados en `index.html` se actualizan para evitar que el navegador reutilice las copias anteriores.
+
+Tras publicar, verifica creación, revisión, envío, PDF con QR y cierre de modales con Escape. La aplicación continúa guardando datos por navegador y origen: los datos del archivo local, otro dominio o HTTP no aparecen automáticamente en el sitio HTTPS. Para trasladarlos utiliza el respaldo con su carpeta de documentos.
+
 ## Diseño y adaptación
 
 La interfaz usa tarjetas en lugar de tablas para correspondencias, borradores, instituciones, ventanillas y usuarios. Cada expediente muestra su asunto, estado, requisito de respuesta, destino, fecha y adjuntos. Se conservan los filtros y las acciones existentes. Las tarjetas pasan a una columna en teléfonos, los formularios y modales se adaptan a la pantalla y las animaciones respetan la preferencia de movimiento reducido

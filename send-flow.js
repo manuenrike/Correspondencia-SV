@@ -1,3 +1,10 @@
+function showFieldError(control,message){
+ let error=control.parentElement.querySelector('.field-error');
+ if(!error){error=document.createElement('span');error.className='field-error';error.id='field-error-'+control.name+'-'+control.id;error.setAttribute('role','alert');control.parentElement.append(error)}
+ error.textContent=message;control.setAttribute('aria-invalid','true');
+ const descriptions=new Set((control.getAttribute('aria-describedby')||'').split(' ').filter(Boolean));descriptions.add(error.id);control.setAttribute('aria-describedby',[...descriptions].join(' '));control.focus();
+ control.addEventListener('input',()=>{error.remove();control.removeAttribute('aria-invalid');descriptions.delete(error.id);control.setAttribute('aria-describedby',[...descriptions].join(' '))},{once:true});
+}
 function mountSendFlow(kind){
  const form=$('#correspondenceForm'),dialog=form.closest('.dialog');
  dialog.classList.add('is-composer');
@@ -5,11 +12,12 @@ function mountSendFlow(kind){
  const sections=[...form.children].filter(element=>element.classList.contains('form-section'));
  const groups=kind==='ciudadana'?[[sections[0],sections[1]],[sections[2],sections[3],sections[4]]]:[[sections[0]],[sections[1],sections[2]]];
  const labels=['Información','Destino y documentos','Revisión'];
- const stepper=dialog.querySelector('.stepbar');stepper.className='send-stepper';
+ const stepper=dialog.querySelector('.stepbar');stepper.className='send-stepper';stepper.setAttribute('aria-label','Progreso del envío');
  stepper.innerHTML=labels.map((label,index)=>`<button type="button" data-step="${index}" ${index===2?'disabled':''}><span>${index+1}</span>${label}</button>`).join('');
  const footer=form.querySelector(':scope > .form-actions');footer.className='form-actions send-footer';
  footer.innerHTML=`<span class="send-save-status">${uiIcon('check')} Guardado automático</span><button type="button" class="btn" data-back>Anterior</button><button type="submit" class="btn primary" data-next>Continuar ${uiIcon('arrow')}</button>`;
  const originalSubmit=form.onsubmit;
+ const resumeReview=Number(editing.sendStep)===2;
  let current=Math.min(1,Math.max(0,Number(editing.sendStep)||0));
  function showStep(index,focus=false){
   current=index;editing.sendStep=index;
@@ -24,10 +32,10 @@ function mountSendFlow(kind){
  function validateStep(index){
   const inputs=groups[index].flatMap(section=>[...section.querySelectorAll('input,select,textarea')]);
   const invalid=inputs.find(input=>!input.disabled&&!input.checkValidity());
-  if(invalid){showStep(index);invalid.reportValidity();return false}
-  if(index===0&&kind==='ciudadana'&&!editing.citizen){toast('Verifica la identidad del ciudadano antes de continuar');return false}
-  if(index===1&&!files.length){toast('Adjunta al menos un documento PDF');return false}
-  if(index===1&&kind==='ciudadana'&&!editing.validated){toast('Completa la validación del descargo de responsabilidad');return false}
+  if(invalid){showStep(index);showFieldError(invalid,invalid.validationMessage);return false}
+  if(index===0&&kind==='ciudadana'&&!editing.citizen){showFieldError(form.querySelector('[name=identity]'),'Verifica la identidad del ciudadano antes de continuar');return false}
+  if(index===1&&!files.length){showFieldError(form.querySelector('#files'),'Adjunta al menos un documento PDF');return false}
+  if(index===1&&kind==='ciudadana'&&!editing.validated){showFieldError(form.querySelector('#validation'),'Completa la validación del descargo de responsabilidad');return false}
   return true;
  }
  footer.querySelector('[data-back]').onclick=()=>showStep(Math.max(0,current-1),true);
@@ -40,6 +48,7 @@ function mountSendFlow(kind){
   originalSubmit(event);
  };
  showStep(current);
+ if(resumeReview&&validateStep(0)&&validateStep(1))review();
 }
 function refreshAccountPresentation(entry){
  const name=$('#accountName'),office=$('#accountOffice'),institution=$('#activeInstitutionLabel');
