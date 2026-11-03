@@ -37,9 +37,9 @@ async function run(playwright,executablePath){
   await tab.waitForFunction(()=>document.querySelector('.send-save-status')?.dataset.state==='saved');
   assert.equal(await tab.locator('.send-save-status').textContent(),'Borrador guardado');
   await tab.keyboard.press('Escape');
-  // The reception shortcut follows the kind of an actual pending record.
+  // The operational shortcut includes the citizen reception in Por atender.
   await tab.evaluate(()=>{db.records.push({id:'UI-CITIZEN',kind:'ciudadana',from:'I2',fromWindow:'V21',to:active,toWindow:activeWindowId(),subject:'Pendiente ciudadano',created:now(),status:'pending',files:[],messages:[],events:[]});page='inicio';render()});
-  await tab.locator('[data-ui-page]').click();assert.equal(await tab.locator('h1').textContent(),'Correspondencia ciudadana');
+  await tab.locator('[data-ui-page]').click();assert.equal(await tab.locator('h1').textContent(),'Por atender');
   assert.equal(await tab.locator('.correspondence-card').count(),1);
   // Native destructive confirmation is distinct and preserves cancel behavior.
   await tab.evaluate(()=>{window.cancelResult=null;confirmAction({title:'Eliminar prueba',message:'Solo interfaz',danger:true}).then(value=>window.cancelResult=value)});
