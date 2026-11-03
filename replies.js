@@ -15,8 +15,8 @@ function replyDraft(record) {
 function replyComposer() {
   return `<form id="replyForm" class="form-section"><h3>Responder en esta conversación</h3><label class="check"><input type="checkbox" name="requires" value="true">Requiere respuesta</label><p class="hint">Desmarca la casilla si no requiere respuesta</p>
     <label class="field"><span class="field-label">Mensaje <span class="optional">Opcional si adjuntas documentos</span></span><textarea name="text" maxlength="3000" placeholder="Escribe tu respuesta"></textarea></label>
-    <div class="drop" style="margin-top:18px"><p>Adjuntar documentos a la respuesta</p><div class="hint">Hasta 5 archivos PDF · máximo 50 MB por archivo</div><input id="replyFiles" aria-label="Adjuntar PDF a la respuesta" type="file" accept="application/pdf,.pdf" multiple></div>
-    <div id="replyFileList"></div><div class="form-actions"><button id="sendReply" class="btn primary">Enviar respuesta ↗</button></div></form>`;
+    <div class="drop attachment-upload reply-composer__attachments"><span class="upload-icon">${uiIcon('file')}</span><div class="attachment-upload__copy"><p>Adjuntar documentos a la respuesta</p><div class="hint">Hasta 5 PDF · máximo 50 MB por archivo</div></div><input id="replyFiles" aria-label="Adjuntar PDF a la respuesta" type="file" accept="application/pdf,.pdf" multiple></div>
+    <div id="replyFileList"></div><div class="form-actions"><button id="sendReply" class="btn primary">Enviar respuesta ${uiIcon('send')}</button></div></form>`;
 }
 function bindReplyComposer(record) {
   if(!canReplyToCorrespondence(record))return;
@@ -30,8 +30,8 @@ function bindReplyComposer(record) {
     $('#sendReply').disabled = draft.busy;
     form.elements.text.disabled = draft.busy;
     form.elements.requires.disabled=draft.busy;
-    $('#sendReply').textContent = draft.busy ? 'Procesando documentos…' : 'Enviar respuesta ↗';
-    $('#replyFileList').innerHTML = draft.files.map((f,i)=>`<div class="file-row"><span>▤ ${esc(f.name)} <small class="hint">${(f.size/1024/1024).toFixed(2)} MB</small></span><div>${documentActions(f.id)} <button type="button" class="icon-btn" data-remove="${i}" ${draft.busy?'disabled':''} aria-label="Quitar documento">${uiIcon('trash')}</button></div></div>`).join('');
+    $('#sendReply').innerHTML = draft.busy ? 'Procesando documentos…' : 'Enviar respuesta '+uiIcon('send');
+    $('#replyFileList').innerHTML = draft.files.map((f,i)=>`<div class="file-row"><span class="attachment__description">${uiIcon('file')}<span>${esc(f.name)}<small class="hint">${formatFileSize(f.size)} · PDF</small></span></span><div>${documentActions(f.id)} <button type="button" class="icon-btn attachment__remove" data-remove="${i}" ${draft.busy?'disabled':''} aria-label="Quitar documento">${uiIcon('trash')}</button></div></div>`).join('');
     $$('#replyFileList [data-remove]').forEach(b=>b.onclick=()=>{if(!draft.busy){draft.files.splice(Number(b.dataset.remove),1);persistReplyDrafts();refresh()}});
   };
   $('#replyFiles').onchange = async e => {

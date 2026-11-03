@@ -17,3 +17,6 @@ backups/
 node_modules/
 .DS_Store
 Thumbs.db
+
+# Local visual QA captures (isolated test data)
+artifacts/

@@ -58,3 +58,9 @@ Menú nativo con confinamiento de foco; restaura el sidebar al cerrar, pulsar Es
 Contrastes calculados: acción blanca/azul 5,17:1; texto secundario/superficie secundaria 5,76:1; éxito 6,81:1; advertencia 6,84:1; error 5,91:1. Bordes de controles/blanco 3,08:1.
 
 Las pruebas no constituyen certificación WCAG completa. No se modifican ventanillas, respaldo, PDF, QR, recepción ni conversación.
+
+## Refinamiento visual
+
+La [segunda pasada](visual-polish.md) unifica las métricas del directorio con las bandejas, separa la identidad de las acciones en tarjetas de usuario y normaliza iconos y adjuntos. Asuntos de expediente/revisión: 20 px; títulos de diálogo: 24 px; confirmaciones: 20 px. Iconos de metadatos: 14 px, acciones: 16 px y navegación: 18 px.
+
+Los controles de administración usan 32 px con espacio suficiente y puntero fino; conservan 44 px en pantallas pequeñas o con puntero táctil. Los borradores usan una acción de continuación discreta y los tamaños documentales se muestran en KB o MB según su magnitud. Las capturas y limitaciones están documentadas en el informe.

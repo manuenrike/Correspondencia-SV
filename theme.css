@@ -8,6 +8,7 @@
  --color-secondary: #526176;
  --color-muted: #64748b;
  --color-border: #e2e8f0;
+ --color-surface-hover-border: #cbd5e1;
  --color-control-border: #8794a6;
  --color-primary: #2563eb;
  --color-primary-hover: #1d4ed8;
@@ -40,7 +41,8 @@ button { border: 0; background: transparent; }
 main:focus { outline: none; }
 h1,h2,h3 { color: var(--color-ink); }
 p { color: var(--color-secondary); }
-.skip-link { color: white; background: var(--color-primary); border-radius: var(--radius-control); box-shadow: var(--shadow-popover); }
+.skip-link { color: white; background: var(--color-primary); border-radius: var(--radius-control); box-shadow: none; }
+.skip-link:focus { box-shadow: var(--shadow-popover); }
 /* Navigation and account */
 #appSidebar { background: var(--color-surface); border-right: 1px solid var(--color-border); }
 .brand { color: var(--color-ink); }
@@ -78,7 +80,7 @@ p { color: var(--color-secondary); }
 .shell > footer b { color: var(--color-primary); font-weight: 500; }
 /* Controls */
 .btn { border: 1px solid var(--color-control-border); background: var(--color-surface); color: var(--color-ink); box-shadow: var(--shadow-surface); }
-.btn:hover { background: var(--color-canvas); border-color: #94a3b8; }
+.btn:hover { background: var(--color-canvas); border-color: var(--color-secondary); }
 .btn.primary, .btn.hero-primary { background: var(--color-primary); color: var(--color-surface); border-color: var(--color-primary); }
 .btn.primary:hover, .btn.hero-primary:hover { background: var(--color-primary-hover); border-color: var(--color-primary-hover); }
 .btn.success { color: var(--color-success); border-color: #bbf7d0; background: var(--color-success-soft); }
@@ -118,7 +120,7 @@ button:disabled, select:disabled { opacity: .6; box-shadow: none; }
 .tabs button.active::after { background: var(--color-primary); }
 .search svg { color: var(--color-muted); }
 .correspondence-card { background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--shadow-surface); transition: border-color 180ms,box-shadow 180ms; }
-.correspondence-card:hover { border-color: var(--color-control-border); box-shadow: 0 3px 12px rgb(15 23 42 / .045); }
+.correspondence-card:hover { border-color: var(--color-surface-hover-border); box-shadow: 0 2px 8px rgb(15 23 42 / .045); }
 .correspondence-card__icon { background: var(--color-surface-muted); color: var(--color-secondary); }
 .needs-attention .correspondence-card__icon { background: var(--color-warning-soft); color: var(--color-warning); }
 .type-label { color: var(--color-secondary); }
@@ -218,3 +220,15 @@ input[type=file]::file-selector-button:hover { background: var(--color-surface-m
 /* Explicit error boundary in addition to the associated message. */
 .field :is(input,select,textarea)[aria-invalid=true] { border-color: var(--color-danger); }
 input, select, textarea { font-weight: 400; }
+
+.dialog { scrollbar-color: var(--color-control-border) transparent; }
+
+.stats--directory .stat:nth-child(2) .stat-icon { color: var(--color-success); }
+.stats--directory .stat:nth-child(3) .stat-icon { color: var(--color-secondary); }
+
+/* A repeated resume action is quieter than the page-level primary action. */
+.draft-card .directory-actions > .btn { background: transparent; color: var(--color-primary-hover); border-color: transparent; box-shadow: none; }
+.draft-card .directory-actions > .btn:hover, .card-open:hover { color: var(--color-primary); text-decoration: underline; text-underline-offset: 4px; }
+
+.field :is(input,select,textarea)[aria-invalid=true]:focus { box-shadow: 0 0 0 3px var(--color-danger-soft); }
+.field :is(input,select,textarea)[aria-invalid=true]:focus-visible { outline-color: var(--color-danger); }
