@@ -61,6 +61,10 @@ Las pruebas no constituyen certificación WCAG completa. No se modifican ventani
 
 ## Refinamiento visual
 
+### Operación y pendientes
+
+La [auditoría operativa](operational-ux-audit.md) incorpora UI UX Pro Max conservando los tokens de este documento. «Por atender» usa ámbar y texto de acción para recepciones/respuestas propias; violeta sigue indicando requerimiento de respuesta, aunque corresponda actuar a la contraparte. «Entrante» expresa dirección, «Recibido» expresa aceptación y «Conversación finalizada» expresa cierre. Los filtros adicionales se agrupan en un `details` nativo; el contador de resultados usa una única región de estado contextual. Los formularios muestran campos obligatorios y un resumen enlazado cuando hay varios errores. No se agregaron hojas CSS.
+
 La [segunda pasada](visual-polish.md) unifica las métricas del directorio con las bandejas, separa la identidad de las acciones en tarjetas de usuario y normaliza iconos y adjuntos. Asuntos de expediente/revisión: 20 px; títulos de diálogo: 24 px; confirmaciones: 20 px. Iconos de metadatos: 14 px, acciones: 16 px y navegación: 18 px.
 
 Los controles de administración usan 32 px con espacio suficiente y puntero fino; conservan 44 px en pantallas pequeñas o con puntero táctil. Los borradores usan una acción de continuación discreta y los tamaños documentales se muestran en KB o MB según su magnitud. Las capturas y limitaciones están documentadas en el informe.

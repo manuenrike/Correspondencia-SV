@@ -12,6 +12,10 @@ Tras publicar, verifica creación, revisión, envío, PDF con QR y cierre de mod
 
 ## Diseño y adaptación
 
+La vista **Por atender** reúne recepciones pendientes dirigidas a la ventanilla activa y respuestas institucionales requeridas por la contraparte. Los envíos que esperan recepción o respuesta de otra ventanilla permanecen en su bandeja habitual. Los filtros combinan dirección, búsqueda, estado, fechas de envío, prioridad, tipo de documento, institución, requerimiento de respuesta y orden. **Limpiar filtros** restablece los criterios de la vista. El dashboard muestra la actividad según las fechas reales del historial.
+
+La [auditoría de mejoras operativas](docs/operational-ux-audit.md) documenta el uso de UI UX Pro Max, las reglas de «Por atender», archivos, verificaciones y límites. Con Node, Playwright disponible y un navegador instalado, `node tests/run.cjs` ejecuta las seis suites. `BROWSER_PATH` permite indicar el ejecutable; no se requieren estas herramientas para usar o publicar la aplicación.
+
 La interfaz presenta filas de correspondencia fáciles de comparar en escritorio y tarjetas adaptativas en móvil. Cada expediente muestra asunto, dirección, estado, requisito de respuesta, institución, fecha y adjuntos. Borradores, instituciones, ventanillas y usuarios conservan sus tarjetas, filtros y acciones. La navegación móvil abre un menú accesible; los formularios y modales se adaptan a la pantalla y respetan la preferencia de movimiento reducido.
 
 El [sistema visual Modern Institutional SaaS](docs/design-system.md) utiliza superficies blancas, fondo gris azulado, tipografía Inter y azul como acción principal. `layout.css` contiene la distribución y `theme.css` los tokens y estados visuales. `presentation.js` controla el menú móvil y los atajos de interfaz. Las hojas históricas no se cargan. El [informe del rediseño premium](docs/premium-redesign.md) documenta decisiones, pruebas y limitaciones.
