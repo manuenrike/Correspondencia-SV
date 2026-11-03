@@ -28,13 +28,14 @@ function emptyCards(title,description,icon='inbox'){return `<div class="empty-st
 function correspondenceCards(records){
  const list=records.map(record=>{
   const outgoing=isWindowSender(record),other=inst(outgoing?record.to:record.from);
-  const attachments=(record.files||[]).length+(record.disclaimer?1:0),priority=record.priority||'Media';
-  return `<article class="correspondence-card kind-${esc(record.kind)} ${record.status==='pending'&&!outgoing?'needs-attention':''}">
+  const attachments=(record.files||[]).length+(record.disclaimer?1:0),priority=record.priority;
+  const action=attentionAction(record);
+  return `<article class="correspondence-card kind-${esc(record.kind)} ${action?'needs-attention':''}">
    <span class="correspondence-card__icon">${uiIcon(record.kind==='ciudadana'?'person':'building')}</span>
-   <div class="correspondence-card__body"><div class="card-top"><span class="type-label">${record.kind==='ciudadana'?'Ciudadana':'Institucional'}</span><span class="correspondence-card__direction">${outgoing?'↗ Enviada':'↙ Recibida'}</span></div>
+   <div class="correspondence-card__body"><div class="card-top"><span class="type-label">${record.kind==='ciudadana'?'Ciudadana':'Institucional'}</span><span class="correspondence-card__direction">${outgoing?'↗ Enviada':'↙ Entrante'}</span>${action?`<span class="attention-label">${uiIcon(action==='receive'?'inbox':'edit')}${action==='receive'?'Confirmar recepción':'Responder a la contraparte'}</span>`:''}</div>
     <button type="button" class="card-title" onclick="detail('${record.id}')">${esc(record.subject)}</button>
     <div class="card-route"><span>${outgoing?'Para':'De'}</span><b>${esc(other?.name||'Institución no disponible')}</b>${record.citizen?`<span class="citizen-name">· ${esc(record.citizen)}</span>`:''}</div>
-    <div class="card-meta"><span class="code">${esc(record.id)}</span><span>${uiIcon('clock')}${date(record.created)}</span><span>${uiIcon('file')}${attachments} PDF</span>${record.kind==='institucional'?`<span class="priority-dot">Prioridad ${esc(priority.toLowerCase())}</span>`:''}</div>
+    <div class="card-meta"><span class="code">${esc(record.id)}</span><span>${uiIcon('clock')}${date(record.created)}</span><span>${uiIcon('file')}${attachments} PDF</span>${record.kind==='institucional'&&priority?`<span class="priority-dot">Prioridad ${esc(priority.toLowerCase())}</span>`:''}</div>
    </div><div class="correspondence-card__side"><div class="card-status">${badge(record)}</div><button class="card-open" onclick="detail('${record.id}')" aria-label="Abrir ${esc(record.subject)}">Ver expediente ${uiIcon('arrow')}</button></div>
   </article>`;
  }).join('');
@@ -46,9 +47,14 @@ function institutionCards(){const list=db.institutions.filter(i=>(!filter||(filt
 function windowCards(institution){return `<div class="directory-grid compact-grid">${institution.windows.map(w=>`<article class="directory-card" data-search="${esc((w.id+' '+w.name).toLowerCase())}"><div class="directory-top"><span class="directory-icon">${uiIcon('window')}</span><span class="code">${esc(w.id)}</span></div><h3>${esc(w.name)}</h3><p>${w.users.length} usuarios asignados</p><div class="directory-actions"><button class="btn" onclick="users('${institution.id}','${w.id}')">Gestionar usuarios ${uiIcon('arrow')}</button><div class="actions"><button class="icon-btn" onclick="editWindow('${institution.id}','${w.id}')" aria-label="Editar ventanilla" title="Editar">${uiIcon('edit')}</button><button class="icon-btn" onclick="deleteWindow('${institution.id}','${w.id}')" aria-label="Eliminar ventanilla" title="Eliminar">${uiIcon('trash')}</button></div></div></article>`).join('')}</div>${!institution.windows.length?emptyCards('Abre un punto de atención','Crea una ventanilla para asignar a su equipo.','window'):''}<div class="search-empty" hidden>Sin resultados para esta búsqueda</div>`}
 function userCards(institutionId,window){return `<div class="people-grid">${window.users.map(user=>`<article class="person-card" data-search="${esc((user.name+' '+user.email).toLowerCase())}"><span class="person-avatar">${esc(user.name.split(/\s+/).slice(0,2).map(n=>n[0]).join(''))}</span><div class="person-info"><h3>${esc(user.name)}</h3><p>${esc(user.email)}</p></div><div class="person-card__footer"><span class="badge ${user.active?'b-green':'b-gray'}">${user.active?'Activo':'Inactivo'}</span><div class="person-actions"><button class="icon-btn" onclick="editUser('${institutionId}','${window.id}','${user.id}')" title="Editar usuario" aria-label="Editar ${esc(user.name)}">${uiIcon('edit')}</button><button class="icon-btn" onclick="toggleUser('${institutionId}','${window.id}','${user.id}')" title="${user.active?'Desactivar':'Activar'}" aria-label="${user.active?'Desactivar':'Activar'} ${esc(user.name)}">${uiIcon('power')}</button></div></div></article>`).join('')}</div>${!window.users.length?emptyCards('El equipo empieza aquí','Asigna usuarios para gestionar esta ventanilla.','person'):''}<div class="search-empty" hidden>Sin resultados para esta búsqueda</div>`}
 function dashboardHero(){
- const pendingRecords=db.records.filter(record=>isWindowRecipient(record)&&record.status==='pending');
- const pending=pendingRecords.length,nextKind=pendingRecords[0]?.kind||'institucional';
- return `<section class="welcome" aria-label="Acciones de tu ventanilla"><div class="dashboard-summary"><span class="dashboard-summary__icon">${uiIcon('inbox')}</span><div><span class="hero-label">CENTRO DE RECEPCIÓN</span><h2><strong class="dashboard-summary__count">${pending}</strong> ${pending===1?'envío pendiente':'envíos pendientes'}</h2><p>${pending?'Revisa los documentos y confirma su recepción.':'Tu recepción está al día. Aquí verás los próximos envíos.'}</p></div><button class="btn" data-ui-page="${nextKind}" data-ui-box="in" data-ui-filter="pending">Ver bandeja ${uiIcon('arrow')}</button></div><div class="hero-actions"><span class="hero-label">CREAR UN ENVÍO</span><div><button class="btn hero-primary" onclick="newCorrespondence('institucional')">${uiIcon('building')} Institucional</button><button class="btn hero-secondary" onclick="newCorrespondence('ciudadana')">${uiIcon('person')} Ciudadano</button></div></div></section>`;
+ const actionable=db.records.filter(record=>attentionAction(record));
+ const pending=actionable.length,receptions=actionable.filter(record=>attentionAction(record)==='receive').length;
+ return `<section class="welcome" aria-label="Acciones de tu ventanilla"><div class="dashboard-summary"><span class="dashboard-summary__icon">${uiIcon('inbox')}</span><div><span class="hero-label">POR ATENDER</span><h2><strong class="dashboard-summary__count">${pending}</strong> ${pending===1?'expediente requiere tu atención':'expedientes requieren tu atención'}</h2><p>${pending?`${receptions} por recibir · ${pending-receptions} por responder`:'No hay recepciones ni respuestas pendientes de tu ventanilla.'}</p></div><button class="btn" data-ui-page="atencion">Ver por atender ${uiIcon('arrow')}</button></div><div class="hero-actions"><span class="hero-label">NUEVA CORRESPONDENCIA</span><div><button class="btn hero-primary" onclick="newCorrespondence('institucional')">${uiIcon('building')} Institucional</button><button class="btn hero-secondary" onclick="newCorrespondence('ciudadana')">${uiIcon('person')} Ciudadana</button></div></div></section>`;
+}
+
+function recentActivity(records){
+ const events=records.flatMap(record=>(record.events||[]).map(event=>({record,event}))).filter(({event})=>Number.isFinite(Date.parse(event.at))).sort((a,b)=>Date.parse(b.event.at)-Date.parse(a.event.at)).slice(0,6);
+ return `<section class="panel collection-panel" aria-labelledby="recentActivityTitle"><div class="panel-head"><div><h2 id="recentActivityTitle">Actividad reciente</h2><p>Últimos eventos registrados en los expedientes de tu ventanilla.</p></div></div>${events.length?`<ol class="activity-list">${events.map(({record,event})=>`<li><span class="activity-icon">${uiIcon(event.action==='accepted'?'check':event.action==='rejected'?'alert':'clock')}</span><div><button type="button" class="activity-subject" onclick="detail('${record.id}')">${esc(record.subject)}</button><p>${esc(event.text)}</p><small>${esc(record.id)} · <time datetime="${esc(event.at)}">${date(event.at)}</time></small></div><button type="button" class="btn" onclick="detail('${record.id}')" aria-label="Ver expediente ${esc(record.subject)}">Ver expediente ${uiIcon('arrow')}</button></li>`).join('')}</ol>`:emptyCards('Sin actividad registrada','Los envíos, recepciones y respuestas aparecerán aquí con su fecha real.','clock')}</section>`;
 }
 
 // Shared, labeled summaries for review and expediente details.
@@ -78,4 +84,16 @@ function formatFileSize(size){
  if(!Number.isFinite(size)||size<0)return 'Tamaño no disponible';
  const options={maximumFractionDigits:size<1048576?0:2};
  return new Intl.NumberFormat('es-SV',options).format(size<1048576?Math.ceil(size/1024):size/1048576)+(size<1048576?' KB':' MB');
+}
+
+// Notifications remain visible without covering the keyboard-focused control.
+function keepToastClearOfFocus(){
+ const notice=document.querySelector('#toast'),focused=document.activeElement;
+ if(!notice||getComputedStyle(notice).display==='none'||!focused||notice.contains(focused))return;
+ notice.style.top='';notice.style.bottom='';
+ const target=focused.getBoundingClientRect(),rect=notice.getBoundingClientRect();
+ const overlaps=(top,bottom)=>target.left<rect.right&&target.right>rect.left&&target.top<bottom&&target.bottom>top;
+ if(overlaps(rect.top,rect.bottom)&&!overlaps(16,16+rect.height)){
+  notice.style.top='16px';notice.style.bottom='auto';
+ }
 }

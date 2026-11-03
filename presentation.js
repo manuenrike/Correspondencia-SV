@@ -29,7 +29,8 @@
   }
   if(event.target.closest('[data-ui-backups]')){closeMenu();showBackups();return}
   const action=event.target.closest('[data-ui-page]');
-  if(action){page=action.dataset.uiPage;box=action.dataset.uiBox||'all';filter=action.dataset.uiFilter||'';query='';render();document.querySelector('#main').focus({preventScroll:true})}
+  if(action){resetTrayFilters();page=action.dataset.uiPage;box=action.dataset.uiBox||'all';filter=action.dataset.uiFilter||'';render();document.querySelector('#main').focus({preventScroll:true})}
  });
  document.addEventListener('keydown',event=>{const menu=document.querySelector('#accountMenu');if(event.key==='Escape'&&menu.open){menu.open=false;menu.querySelector('summary').focus()}});
+ document.addEventListener('focusin',keepToastClearOfFocus);
 })();

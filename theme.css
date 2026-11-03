@@ -123,6 +123,23 @@ button:disabled, select:disabled { opacity: .6; box-shadow: none; }
 .correspondence-card:hover { border-color: var(--color-surface-hover-border); box-shadow: 0 2px 8px rgb(15 23 42 / .045); }
 .correspondence-card__icon { background: var(--color-surface-muted); color: var(--color-secondary); }
 .needs-attention .correspondence-card__icon { background: var(--color-warning-soft); color: var(--color-warning); }
+.needs-attention { border-inline-start: 3px solid var(--color-warning); }
+.attention-label { color: var(--color-warning); }
+.tray-refinements { background: var(--color-surface); border: 1px solid var(--color-border); }
+.tray-refinements > summary:hover { background: var(--color-canvas); }
+.tray-refinements > summary { color: var(--color-ink); }
+.activity-list { background: var(--color-surface); border: 1px solid var(--color-border); }
+.activity-list li + li { border-top: 1px solid var(--color-border); }
+.activity-icon { background: var(--color-surface-muted); color: var(--color-secondary); }
+.activity-subject { color: var(--color-ink); }
+.activity-subject:hover { color: var(--color-primary-hover); }
+.activity-list small { color: var(--color-secondary); }
+.record-next-action { background: var(--color-warning-soft); border: 1px solid var(--color-warning); color: var(--color-warning); }
+.record-next-action small { color: var(--color-secondary); }
+.required-mark { color: var(--color-danger); }
+.form-error-summary { background: var(--color-danger-soft); border: 1px solid var(--color-danger); color: var(--color-danger); }
+.form-error-summary h3, .form-error-summary a { color: inherit; }
+.form-error-summary:focus-visible { outline: 2px solid var(--color-danger); outline-offset: 3px; }
 .type-label { color: var(--color-secondary); }
 .correspondence-card__direction, .card-meta, .card-route, .citizen-name { color: var(--color-secondary); }
 .card-title { color: var(--color-ink); border: 0; background: transparent; }

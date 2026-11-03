@@ -12,7 +12,7 @@ function refreshSessionUser(){
   if(avatar)avatar.textContent=selected?selected.user.name.split(/\s+/).slice(0,2).map(part=>part[0]).join(''):'—';
   refreshAccountPresentation(selected);
   const workspace=document.querySelector('.workspace small');if(workspace)workspace.textContent=selected?.window.name||'Sin ventanilla activa';
-  select.onchange=()=>{localStorage.setItem('csv-user-'+active,select.value);refreshSessionUser();query='';filter='';box='all';render()};
+  select.onchange=()=>{localStorage.setItem('csv-user-'+active,select.value);refreshSessionUser();resetTrayFilters();render()};
 }
 function currentActor(){
   const key=$('#sessionUser').value;
