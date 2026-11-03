@@ -12,9 +12,9 @@ Tras publicar, verifica creación, revisión, envío, PDF con QR y cierre de mod
 
 ## Diseño y adaptación
 
-La interfaz usa tarjetas en lugar de tablas para correspondencias, borradores, instituciones, ventanillas y usuarios. Cada expediente muestra su asunto, estado, requisito de respuesta, destino, fecha y adjuntos. Se conservan los filtros y las acciones existentes. Las tarjetas pasan a una columna en teléfonos, los formularios y modales se adaptan a la pantalla y las animaciones respetan la preferencia de movimiento reducido
+La interfaz presenta filas de correspondencia fáciles de comparar en escritorio y tarjetas adaptativas en móvil. Cada expediente muestra asunto, dirección, estado, requisito de respuesta, institución, fecha y adjuntos. Borradores, instituciones, ventanillas y usuarios conservan sus tarjetas, filtros y acciones. La navegación móvil abre un menú accesible; los formularios y modales se adaptan a la pantalla y respetan la preferencia de movimiento reducido.
 
-El estándar visual sigue [Dock](docs/design-system.md). `layout.css` contiene la distribución sin colores y `theme.css` es la única paleta activa. Se utiliza fondo crema, texto oscuro, botones de cobalto y una sola familia tipográfica. Los estilos históricos ya no se cargan. Se mantienen tarjetas compactas, adaptación móvil y movimiento reducido
+El [sistema visual Modern Institutional SaaS](docs/design-system.md) utiliza superficies blancas, fondo gris azulado, tipografía Inter y azul como acción principal. `layout.css` contiene la distribución y `theme.css` los tokens y estados visuales. `presentation.js` controla el menú móvil y los atajos de interfaz. Las hojas históricas no se cargan. El [informe del rediseño premium](docs/premium-redesign.md) documenta decisiones, pruebas y limitaciones.
 
 El envío se organiza mediante `send-flow.js` en tres pasos: Información, Destino y documentos, y Revisión. Cada paso valida sus campos; la correspondencia ciudadana también verifica identidad y descargo. Puedes retroceder sin perder datos o cerrar la ventana; el guardado del borrador es automático. El borrador conserva el paso actual. La verificación de identidad muestra un indicador de consulta y descarta resultados pendientes si se modifica el número o se cierra el formulario. El QR se añade únicamente al confirmar el envío
 

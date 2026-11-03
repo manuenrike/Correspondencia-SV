@@ -15,14 +15,14 @@ function mountSendFlow(kind){
  const stepper=dialog.querySelector('.stepbar');stepper.className='send-stepper';stepper.setAttribute('aria-label','Progreso del envío');
  stepper.innerHTML=labels.map((label,index)=>`<button type="button" data-step="${index}" ${index===2?'disabled':''}><span>${index+1}</span>${label}</button>`).join('');
  const footer=form.querySelector(':scope > .form-actions');footer.className='form-actions send-footer';
- footer.innerHTML=`<span class="send-save-status">${uiIcon('check')} Guardado automático</span><button type="button" class="btn" data-back>Anterior</button><button type="submit" class="btn primary" data-next>Continuar ${uiIcon('arrow')}</button>`;
+ footer.innerHTML=`<span class="send-save-status" role="status" aria-live="polite">${uiIcon('check')} Guardado automático</span><button type="button" class="btn" data-back>Anterior</button><button type="submit" class="btn primary" data-next>Continuar ${uiIcon('arrow')}</button>`;
  const originalSubmit=form.onsubmit;
  const resumeReview=Number(editing.sendStep)===2;
  let current=Math.min(1,Math.max(0,Number(editing.sendStep)||0));
  function showStep(index,focus=false){
   current=index;editing.sendStep=index;
   groups.forEach((group,position)=>group.forEach(section=>{section.hidden=position!==index}));
-  stepper.querySelectorAll('[data-step]').forEach(button=>{const position=Number(button.dataset.step);button.classList.toggle('current',position===index);button.classList.toggle('complete',position<index);button.disabled=position>index;button.setAttribute('aria-current',position===index?'step':'false')});
+  stepper.querySelectorAll('[data-step]').forEach(button=>{const position=Number(button.dataset.step);button.classList.toggle('current',position===index);button.classList.toggle('complete',position<index);button.disabled=position>index;button.setAttribute('aria-current',position===index?'step':'false');button.setAttribute('aria-label',`${position+1}. ${labels[position]}${position<index?', completado':position===index?', paso actual':''}`)});
   footer.querySelector('[data-back]').hidden=index===0;
   footer.querySelector('[data-next]').innerHTML=(index===1?'Revisar envío':'Continuar')+' '+uiIcon('arrow');
   const notice=[...form.children].find(element=>element.classList.contains('notice'));if(notice)notice.hidden=index!==1;
