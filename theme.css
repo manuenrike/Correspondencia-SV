@@ -154,3 +154,44 @@ footer{background:var(--color-pure-white);color:var(--color-slate-gray);border-t
 /* Phase 1: explicit keyboard focus and textual validation. */
 input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--color-electric-cobalt);outline-offset:3px}
 .field-error{display:block;font-weight:600;margin-top:8px}
+
+
+/* Phase 2 — theme tokens and component appearance. */
+:root {
+ --color-slate-gray: #606773;
+ --color-steel-gray: #69717e;
+ --color-control-border: #c9ced7;
+ --color-action-soft: #edf4ff;
+ --shadow-card: 0 2px 8px rgb(18 23 34 / .025);
+}
+aside > nav button.active { background: var(--color-action-soft); }
+.welcome { background: var(--color-pure-white); border: 1px solid var(--color-hairline); box-shadow: var(--shadow-card); }
+.hero-label { color: var(--color-slate-gray); }
+.hero-label > span { background: var(--color-electric-cobalt); }
+.dashboard-summary { background: var(--color-surface-ivory); border: 1px solid var(--color-hairline); }
+.dashboard-summary__count { color: var(--color-electric-cobalt); }
+.dashboard-summary__icon { background: var(--color-pure-white); border: 1px solid var(--color-hairline); color: var(--color-electric-cobalt); }
+.dashboard-summary__note { color: var(--color-slate-gray); }
+.stat { background: var(--color-pure-white); box-shadow: var(--shadow-card); }
+.stat strong { color: var(--color-ink-charcoal); }
+.stat:nth-child(4) strong { color: var(--color-vivid-violet); }
+.stat .stat-icon { color: var(--color-electric-cobalt); background: var(--color-action-soft); border-color: transparent; }
+.correspondence-card, .directory-card { box-shadow: var(--shadow-card); }
+.needs-attention { border-left: 3px solid var(--color-electric-cobalt); }
+.card-route b { color: var(--color-ink-charcoal); }
+.empty-state { background: var(--color-pure-white); border: 1px dashed var(--color-control-border); }
+.empty-illustration { color: var(--color-electric-cobalt); background: var(--color-action-soft); }
+.tabs { background: var(--color-surface-ivory); }
+.tabs button.active { background: var(--color-pure-white); color: var(--color-electric-cobalt); }
+.field input, .field select, .field textarea, .toolbar input, .toolbar select, .account-popover select { border-color: var(--color-control-border); }
+.field input:focus, .field select:focus, .field textarea:focus, .toolbar input:focus, .toolbar select:focus { border-color: var(--color-electric-cobalt); box-shadow: 0 0 0 3px var(--color-action-soft); }
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--color-electric-cobalt); outline-offset: 2px; }
+.field-error { color: var(--color-ink-charcoal); }
+[aria-invalid=true] { border-style: dashed; }
+.send-stepper button.current, .send-stepper button.current:disabled { color: var(--color-electric-cobalt); background: var(--color-action-soft); }
+.send-stepper button.current > span, .send-stepper button.current:disabled > span { color: var(--color-pure-white); background: var(--color-electric-cobalt); }
+.drop { background: var(--color-surface-ivory); border-color: var(--color-control-border); }
+.file-row { background: var(--color-pure-white); }
+.timeline p:before { background: var(--color-electric-cobalt); }
+.dialog-head { background: var(--color-canvas-cream); }
+button:disabled { cursor: not-allowed; }

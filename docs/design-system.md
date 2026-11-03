@@ -24,3 +24,11 @@ Las hojas de estilo históricas no se cargan en `index.html`
 - Se mantiene la densidad compacta de una aplicación de gestión, en lugar de las dimensiones de una landing comercial
 
 Los flujos de envío, la validación de identidad y las reglas funcionales no dependen de estos estilos
+
+## Ajustes de legibilidad — Fase 2
+
+- Las secciones finales de `layout.css` y `theme.css` contienen los ajustes responsive y visuales de esta fase, separados por responsabilidad.
+- Texto secundario `#606773`, placeholders `#69717e` y bordes de controles `#c9ced7` para mejorar legibilidad sobre superficies claras.
+- Controles principales de al menos 44 px; campos móviles de 16 px. Tarjetas con títulos de 16 px y metadatos de 11–12 px.
+- Navegación móvil horizontal, modales de pantalla completa en teléfonos y columnas de tarjetas según el espacio disponible.
+- El dashboard presenta las acciones de envío y el número de envíos pendientes de recepción de la institución activa.
