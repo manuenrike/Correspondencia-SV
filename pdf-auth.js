@@ -6,24 +6,24 @@ function recordDocuments(record) {
 function resolveDocumentContext(id) {
   const sent = findDocumentRecord(id);
   if(sent)return {record:sent,file:recordDocuments(sent).find(file=>file.id===id),source:'sent'};
-  if(editing){
+  if(editing&&canAccessDraft(editing)){
     const file=recordDocuments(editing).find(file=>file.id===id);
     if(file)return {record:editing,file,source:'draft'};
   }
-  for(const draft of db.drafts){
+  for(const draft of db.drafts.filter(canAccessDraft)){
     const file=recordDocuments(draft).find(file=>file.id===id);
     if(file)return {record:draft,file,source:'draft'};
   }
   for(const [key,draft] of replyDrafts){
     const file=draft.files.find(file=>file.id===id);
     if(!file)continue;
-    const record=db.records.find(record=>key===record.id+':'+active);
+    const record=db.records.find(record=>key===record.id+':'+active&&canAccessCorrespondence(record));
     if(record){file.submittedBy=active;return {record,file,source:'reply'}};
   }
   return null;
 }
 function findDocumentRecord(id) {
-  return db.records.find(r => recordDocuments(r).some(f => f.id === id));
+  return db.records.find(r => canAccessCorrespondence(r) && recordDocuments(r).some(f => f.id === id));
 }
 async function authenticatedPDF(record, file) {
   const jobKey=record.id+':'+file.id;

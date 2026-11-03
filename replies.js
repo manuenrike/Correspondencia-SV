@@ -6,7 +6,7 @@ function correspondenceRequiresReply(record){
   const latest=(record.messages||[]).filter(message=>typeof message.requires==='boolean').at(-1);
   return latest?latest.requires:record.requires===true;
 }
-function canReplyToCorrespondence(record){return record.kind==='institucional'&&record.status==='accepted'&&correspondenceRequiresReply(record)&&[record.from,record.to].includes(active)}
+function canReplyToCorrespondence(record){return record.kind==='institucional'&&record.status==='accepted'&&correspondenceRequiresReply(record)&&canAccessCorrespondence(record)}
 function replyDraft(record) {
   const key = record.id + ':' + active;
   if (!replyDrafts.has(key)) replyDrafts.set(key, {text:'', files:[], requires:false,busy:false});
@@ -31,7 +31,7 @@ function bindReplyComposer(record) {
     form.elements.text.disabled = draft.busy;
     form.elements.requires.disabled=draft.busy;
     $('#sendReply').textContent = draft.busy ? 'Procesando documentos…' : 'Enviar respuesta ↗';
-    $('#replyFileList').innerHTML = draft.files.map((f,i)=>`<div class="file-row"><span>▤ ${esc(f.name)} <small class="hint">${(f.size/1024/1024).toFixed(2)} MB</small></span><div>${documentActions(f.id)} <button type="button" class="icon-btn" data-remove="${i}" ${draft.busy?'disabled':''} aria-label="Quitar documento">×</button></div></div>`).join('');
+    $('#replyFileList').innerHTML = draft.files.map((f,i)=>`<div class="file-row"><span>▤ ${esc(f.name)} <small class="hint">${(f.size/1024/1024).toFixed(2)} MB</small></span><div>${documentActions(f.id)} <button type="button" class="icon-btn" data-remove="${i}" ${draft.busy?'disabled':''} aria-label="Quitar documento">${uiIcon('trash')}</button></div></div>`).join('');
     $$('#replyFileList [data-remove]').forEach(b=>b.onclick=()=>{if(!draft.busy){draft.files.splice(Number(b.dataset.remove),1);persistReplyDrafts();refresh()}});
   };
   $('#replyFiles').onchange = async e => {

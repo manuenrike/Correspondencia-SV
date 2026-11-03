@@ -11,7 +11,8 @@ function refreshSessionUser(){
   const avatar=document.querySelector('.avatar.user');
   if(avatar)avatar.textContent=selected?selected.user.name.split(/\s+/).slice(0,2).map(part=>part[0]).join(''):'—';
   refreshAccountPresentation(selected);
-  select.onchange=()=>{localStorage.setItem('csv-user-'+active,select.value);refreshSessionUser()};
+  const workspace=document.querySelector('.workspace small');if(workspace)workspace.textContent=selected?.window.name||'Sin ventanilla activa';
+  select.onchange=()=>{localStorage.setItem('csv-user-'+active,select.value);refreshSessionUser();query='';filter='';box='all';render()};
 }
 function currentActor(){
   const key=$('#sessionUser').value;
@@ -29,12 +30,12 @@ function eventMarkup(event,record){
   return `<p>${esc(isSend?'Correspondencia creada y enviada':event.text)}${actor?actorMarkup(actor):legacyDecision?'<small>Usuario no registrado en este evento anterior</small>':''}<small>${date(event.at)}</small></p>`;
 }
 function canRejectCorrespondence(record){
-  return record.status==='pending'?record.to===active:record.kind==='institucional'&&record.status==='accepted'&&[record.from,record.to].includes(active);
+  return !!record&&canAccessCorrespondence(record)&&(record.status==='pending'?isWindowRecipient(record):record.kind==='institucional'&&record.status==='accepted');
 }
 function responseRequirementMarkup(value){return value?'<span class="badge b-purple">Requiere respuesta</span>':''}
 function registerDecision(record,action,reason=''){
   const actor=currentActor();
-  if(action==='accepted'?(record.to!==actor.institutionId||record.status!=='pending'):!canRejectCorrespondence(record))return null;
+  if(action==='accepted'?(!isWindowRecipient(record)||record.status!=='pending'):!canRejectCorrespondence(record))return null;
   if(action!=='accepted'&&reason.trim().length<5)throw Error('Indica una justificación de al menos 5 caracteres');
   const at=now(),accepted=action==='accepted';
   record.status=accepted?'accepted':'rejected';

@@ -195,3 +195,32 @@ aside > nav button.active { background: var(--color-action-soft); }
 .timeline p:before { background: var(--color-electric-cobalt); }
 .dialog-head { background: var(--color-canvas-cream); }
 button:disabled { cursor: not-allowed; }
+
+
+/* Consistent native selects: preserve keyboard behavior, replace only the arrow. */
+.field select, .toolbar select, .account-popover select {
+ appearance: none;
+ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23606773' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3C/svg%3E");
+ background-repeat: no-repeat;
+ background-position: right 14px center;
+ padding-right: 44px;
+}
+.send-stepper { border-bottom: 0; }
+.send-stepper button, .send-stepper button:disabled, .send-stepper button.current, .send-stepper button.current:disabled { background: transparent; color: var(--color-slate-gray); }
+.send-stepper button::after { background: var(--color-control-border); }
+.send-stepper button.current, .send-stepper button.current:disabled { color: var(--color-ink-charcoal); font-weight: 600; }
+.send-stepper button.current::after { background: var(--color-electric-cobalt); }
+.send-stepper button.current > span, .send-stepper button.current:disabled > span { color: var(--color-pure-white); background: var(--color-electric-cobalt); border-color: transparent; }
+.send-stepper button.complete > span { background: var(--color-action-soft); color: var(--color-electric-cobalt); border-color: transparent; }
+.send-stepper button:disabled > span { background: var(--color-pure-white); color: var(--color-slate-gray); }
+input[type=file]::file-selector-button { border: 1px solid var(--color-control-border); background: var(--color-pure-white); color: var(--color-ink-charcoal); }
+input[type=file]::file-selector-button:hover { background: var(--color-action-soft); }
+.file-row .attachment__remove { border-color: var(--color-hairline); background: var(--color-pure-white); color: var(--color-slate-gray); }
+.file-row .attachment__remove:hover { color: var(--color-ink-charcoal); border-color: var(--color-control-border); background: var(--color-surface-ivory); }
+.route-summary__label, .route-summary__endpoint > span:last-child, .record-facts dt, .record-author { color: var(--color-slate-gray); }
+.route-summary__endpoint strong, .record-facts dd { color: var(--color-ink-charcoal); }
+.record-facts { border-top: 1px solid var(--color-hairline); }
+@media (forced-colors: active) {
+ .field select, .toolbar select, .account-popover select { appearance: auto; background-image: none; padding-right: 12px; }
+ .send-stepper button.current::after { background: Highlight; }
+}

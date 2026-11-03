@@ -192,3 +192,46 @@ main, .hero-copy, .panel, .field, .file-row > span, .person-info { min-width: 0;
 
 /* Hero copy remains a single reading column at every breakpoint. */
 .welcome .hero-copy { display: block; }
+
+
+/* Targeted polish: compact progress, document controls and record summaries. */
+.send-stepper { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; padding: 0 0 18px; margin: 0 0 20px; }
+.send-stepper button { position: relative; display: flex; align-items: center; justify-content: flex-start; flex-direction: column; gap: 8px; min-height: 72px; padding: 10px 4px 12px; margin: 0; font-size: 11px; font-weight: 500; border-radius: 0; text-align: center; line-height: 1.4; }
+.send-stepper button > span { width: 26px; height: 26px; font-size: 12px; flex: 0 0 26px; }
+.send-stepper button::after { content: ''; position: absolute; inset: auto 0 0; height: 2px; border-radius: 2px; }
+.dialog-head { align-items: flex-start; }
+.attachment-upload { display: grid; grid-template-columns: 40px minmax(0,1fr); gap: 14px; align-items: center; padding: 18px; text-align: left; }
+.attachment-upload p { margin: 0 0 4px; font-size: 14px; font-weight: 500; }
+.attachment-upload .upload-icon { margin: 0; }
+.attachment-upload__copy { min-width: 0; }
+.attachment-upload input { grid-column: 1/-1; width: 100%; margin: 0; padding: 8px; min-height: 48px; }
+input[type=file]::file-selector-button { min-height: 36px; padding: 7px 12px; border-radius: 8px; font: inherit; font-weight: 500; margin-right: 10px; cursor: pointer; }
+.attachment__description { display: flex; align-items: flex-start; gap: 10px; }
+.attachment__description > svg { width: 18px; height: 18px; margin-top: 2px; flex: 0 0 18px; }
+.attachment__description > span { min-width: 0; }
+.attachment__description .hint { display: block; margin-top: 4px; }
+.file-row .attachment__remove { border-radius: 10px; }
+.route-summary { display: grid; grid-template-columns: minmax(0,1fr); gap: 20px; padding-block: 4px 22px; }
+.route-summary__endpoint { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.route-summary__label { font-size: 12px; font-weight: 500; }
+.route-summary__endpoint strong { font-size: 15px; font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; }
+.route-summary__endpoint > span:last-child { font-size: 13px; overflow-wrap: anywhere; }
+.record-facts { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px 20px; padding-top: 20px; margin: 0; }
+.record-facts__item { min-width: 0; }
+.record-facts dt { font-size: 12px; margin-bottom: 5px; }
+.record-facts dd { font-size: 14px; font-weight: 500; margin: 0; line-height: 1.5; overflow-wrap: anywhere; }
+.record-author { font-size: 12px; margin-top: 18px; }
+.record-subject { font-size: 20px; line-height: 1.5; margin-top: 0; overflow-wrap: anywhere; }
+.record-summary > .field { margin-top: 16px; }
+.review-subject { margin-bottom: 20px; padding-bottom: 18px; }
+.review-subject h3 { margin: 8px 0 0; font-size: 21px; line-height: 1.5; }
+.review-subject .type-label { font-size: 11px; }
+@media (min-width:600px) {
+ .send-stepper button { flex-direction: row; gap: 9px; font-size: 12px; min-height: 48px; padding: 8px 4px 14px; text-align: left; }
+ .route-summary { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; }
+ .attachment-upload { grid-template-columns: 40px minmax(0,1fr); }
+}
+
+.file-row > .document-actions { margin-left: auto; flex: 0 0 auto; }
+
+.send-stepper button { min-width: 0; white-space: normal; overflow-wrap: anywhere; }
