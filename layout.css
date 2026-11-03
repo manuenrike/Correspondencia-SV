@@ -112,9 +112,6 @@ main { width: 100%; max-width: 1480px; flex: 1; padding: 28px 16px 40px; margin:
 .dashboard-summary__count { font-weight: 600; }
 .dashboard-summary p { font-size: var(--text-caption); line-height: 1.6; }
 .dashboard-summary > .btn { margin-left: 54px; }
-.hero-actions { padding: var(--space-5); display: flex; flex-direction: column; justify-content: center; gap: var(--space-3); }
-.hero-actions > div { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-.hero-actions .btn { flex: 1; }
 /* Collections, filtering and rows */
 .panel { min-width: 0; }
 .panel-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-5); }
@@ -396,7 +393,6 @@ input[type=file]::file-selector-button { min-height: 36px; padding: 7px 12px; bo
 }
 @media (min-width: 1150px) {
  .stats { grid-template-columns: repeat(4,minmax(0,1fr)); gap: var(--space-4); }
- .welcome { grid-template-columns: minmax(0,1.8fr) minmax(250px,1fr); }
  .dashboard-summary > .btn { margin-left: auto; }
  .identity-fields { grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr) auto; }
  .identity-verify { grid-column: auto; }

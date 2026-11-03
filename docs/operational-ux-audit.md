@@ -72,6 +72,8 @@ Los filtros se combinan mediante intersección. «Fecha de envío desde/hasta» 
 
 Dashboard: los cuatro KPI mantienen sus cálculos reales; el centro operativo muestra recepción y respuesta por atender. La actividad utiliza exclusivamente `events[].at` y `events[].text` de expedientes accesibles, con enlace al detalle. No se fabrican eventos para registros antiguos sin historial ni tendencias.
 
+Refinamiento solicitado tras la revisión: se retiró el bloque duplicado de creación del dashboard. El botón «+ Nueva correspondencia» del encabezado conserva la selección de envío institucional o ciudadano. El resumen «Por atender» ocupa todo el ancho disponible y mantiene su acceso a pendientes.
+
 ### Formularios y detalle
 
 Se reutilizan las secciones, validaciones nativas y las comprobaciones de identidad, PDF y descargo. Un fallo con varios campos muestra todos los errores pertinentes del paso y mueve el foco al resumen; con uno, al control. Se conservan las ayudas en `aria-describedby` al retirar el error. «Guardar borrador» llama al mismo guardado existente; no crea otra persistencia. Atrás, Continuar, Revisar envío y Confirmar envío mantienen su función por etapa.
