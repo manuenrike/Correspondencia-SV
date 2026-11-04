@@ -233,6 +233,19 @@ input[type=file]::file-selector-button:hover { background: var(--color-surface-m
 input, select, textarea { font-weight: 400; }
 
 .dialog { scrollbar-color: var(--color-control-border) transparent; }
+/* Keep the scroll rail inset from the rounded dialog corners. */
+@supports selector(::-webkit-scrollbar) {
+ .dialog { scrollbar-width: auto; scrollbar-color: auto; }
+ .dialog::-webkit-scrollbar { width: 12px; height: 12px; }
+ .dialog::-webkit-scrollbar-track { margin-block: var(--space-4); background: transparent; }
+ .dialog::-webkit-scrollbar-thumb { background: var(--color-control-border); border: 3px solid var(--color-canvas); border-radius: var(--radius-dialog); background-clip: padding-box; }
+ .dialog::-webkit-scrollbar-thumb:hover { background-color: var(--color-secondary); }
+ .dialog::-webkit-scrollbar-corner { background: transparent; }
+}
+@media (forced-colors: active) {
+ .dialog { scrollbar-color: auto; }
+ .dialog::-webkit-scrollbar-thumb { background: ButtonText; border-color: Canvas; }
+}
 
 .stats--directory .stat:nth-child(2) .stat-icon { color: var(--color-success); }
 .stats--directory .stat:nth-child(3) .stat-icon { color: var(--color-secondary); }

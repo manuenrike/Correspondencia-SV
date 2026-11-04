@@ -35,6 +35,18 @@ function deactivateModal(layer) {
  if (entry.opener?.isConnected && !entry.opener.closest('[inert]')) entry.opener.focus();
  else {const replacement=[...document.querySelectorAll('button')].find(button=>entry.action?button.getAttribute('onclick')===entry.action:entry.page&&button.dataset.page===entry.page);(modalLayers.at(-1)?.layer.querySelector('.dialog') || replacement || document.querySelector('nav button.active'))?.focus()}
 }
+// A backdrop click dismisses only the top overlay. Dragging from the dialog
+// onto the backdrop must not discard the user's interaction.
+let backdropPress=null;
+document.addEventListener('pointerdown',event=>{
+ const entry=modalLayers.at(-1);
+ backdropPress=!confirmationOpen&&event.button===0&&event.target===entry?.layer?entry:null;
+});
+document.addEventListener('pointercancel',()=>{backdropPress=null});
+document.addEventListener('click',event=>{
+ const entry=modalLayers.at(-1),pressed=backdropPress;backdropPress=null;
+ if(!confirmationOpen&&entry&&entry===pressed&&event.target===entry.layer)entry.onClose();
+});
 document.addEventListener('keydown', event => {
  if (confirmationOpen) return; // Native confirmation owns its keyboard lifecycle.
  const entry = modalLayers.at(-1);
