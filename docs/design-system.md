@@ -63,6 +63,10 @@ Las pruebas no constituyen certificación WCAG completa. No se modifican ventani
 
 ### Operación y pendientes
 
+Los chips se generan con `uiChip`: icono SVG decorativo de 12 px y trazo 1,6, etiqueta textual y color semántico. Recepción, requerimiento de respuesta, cierre, borradores, estados de instituciones/usuarios y contadores documentales comparten este componente. El icono expresa el significado de cada etiqueta, conservando la misma familia visual que «Recibido».
+
+El estilo de scrollbar es global: página, navegación, menús, paneles, diálogos y campos multilínea comparten un indicador redondeado con separación de los extremos. El borde del indicador utiliza la superficie del contenedor. Se conservan alternativas nativas para Firefox y colores del sistema en alto contraste.
+
 La [auditoría operativa](operational-ux-audit.md) incorpora UI UX Pro Max conservando los tokens de este documento. «Por atender» usa ámbar y texto de acción para recepciones/respuestas propias; violeta sigue indicando requerimiento de respuesta, aunque corresponda actuar a la contraparte. «Entrante» expresa dirección, «Recibido» expresa aceptación y «Conversación finalizada» expresa cierre. Los filtros adicionales se agrupan en un `details` nativo; el contador de resultados usa una única región de estado contextual. Los formularios muestran campos obligatorios y un resumen enlazado cuando hay varios errores. No se agregaron hojas CSS.
 
 La [segunda pasada](visual-polish.md) unifica las métricas del directorio con las bandejas, separa la identidad de las acciones en tarjetas de usuario y normaliza iconos y adjuntos. Asuntos de expediente/revisión: 20 px; títulos de diálogo: 24 px; confirmaciones: 20 px. Iconos de metadatos: 14 px, acciones: 16 px y navegación: 18 px.

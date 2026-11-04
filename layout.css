@@ -107,8 +107,9 @@ main { width: 100%; max-width: 1480px; flex: 1; padding: 28px 16px 40px; margin:
 .icon-btn, .close { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; min-width: 44px; padding: var(--space-2); border-radius: var(--radius-control); flex-shrink: 0; }
 .close { font-size: 24px; font-weight: 400; }
 .actions, .inline { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2); }
-.badge { display: inline-flex; align-items: center; gap: 5px; font-size: var(--text-caption); font-weight: 500; line-height: 1.5; padding: 4px 8px; border-radius: 6px; }
-.badge svg { width: 12px; height: 12px; }
+.badge { display: inline-flex; align-items: center; gap: 5px; max-width: 100%; font-size: var(--text-caption); font-weight: 500; line-height: 1.5; padding: 4px 8px; border-radius: 6px; }
+.badge svg { width: 12px; height: 12px; flex: 0 0 12px; }
+.badge > span { min-width: 0; overflow-wrap: anywhere; }
 .status-chips { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
 .code { font-family: ui-monospace,SFMono-Regular,Consolas,monospace; font-size: var(--text-caption); letter-spacing: -.02em; overflow-wrap: anywhere; }
 /* KPIs and operational dashboard */
