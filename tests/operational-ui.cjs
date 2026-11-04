@@ -143,6 +143,15 @@ async function run(playwright,executablePath){
   assert.equal(await tab.locator('[name=subject]').inputValue(),'Borrador con ayuda accesible');
   await tab.keyboard.press('Escape');
   // Reflow at half the desktop viewport and landscape orientation (not native browser zoom).
+  for(const width of [320,375,768,1024,1440]){
+   await tab.setViewportSize({width,height:900});
+   await tab.evaluate(()=>{document.activeElement.blur();toast('Notificación de prueba')});
+   await tab.locator('#toast').evaluate(e=>Promise.all(e.getAnimations().map(animation=>animation.finished)));
+   const position=await tab.locator('#toast').boundingBox();
+   assert.ok(position.x>=0&&position.x+position.width<=width);
+   assert.ok(position.y>=16&&position.y<=24,'notification stays at the top: '+JSON.stringify({width,position,style:await tab.locator('#toast').getAttribute('style')}));
+   assert.ok(width-position.x-position.width<=24,'notification stays on the right');
+  }
   await tab.setViewportSize({width:720,height:450});
   await tab.evaluate(()=>{page='atencion';resetTrayFilters();render()});
   assert.equal(await tab.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);

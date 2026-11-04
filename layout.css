@@ -349,7 +349,7 @@ input[type=file]::file-selector-button { min-height: 36px; padding: 7px 12px; bo
 .confirmation-dialog h2 { font-size: var(--text-section); letter-spacing: -.025em; font-weight: 600; line-height: 1.4; margin: 8px 0 12px; }
 .confirmation-dialog p { font-size: var(--text-small); margin-bottom: var(--space-6); }
 .confirmation-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--space-2); padding-top: 20px; }
-#toast { display: none; align-items: flex-start; gap: var(--space-3); position: fixed; z-index: 70; left: 16px; right: 16px; bottom: 20px; padding: var(--space-4); border-radius: var(--radius-surface); }
+#toast { display: none; align-items: flex-start; gap: var(--space-3); position: fixed; z-index: 70; left: auto; right: max(16px, env(safe-area-inset-right)); top: max(16px, env(safe-area-inset-top)); bottom: auto; width: min(380px, calc(100% - 32px)); padding: var(--space-4); border-radius: var(--radius-surface); }
 .toast-symbol { width: 32px; height: 32px; border-radius: var(--radius-control); display: inline-grid; place-items: center; flex-shrink: 0; }
 .toast-symbol svg { width: 17px; height: 17px; }
 .toast-copy { flex: 1; min-width: 0; }
@@ -390,7 +390,7 @@ input[type=file]::file-selector-button { min-height: 36px; padding: 7px 12px; bo
  .review-footer .btn { flex: 0 1 auto; }
  .sender-notice { grid-template-columns: 16px minmax(0,1fr) auto; }
  .sender-person { grid-column: auto; }
- #toast { left: auto; right: 24px; bottom: 24px; width: 380px; }
+ #toast { right: max(24px, env(safe-area-inset-right)); top: max(24px, env(safe-area-inset-top)); }
  .shell > footer { padding-inline: 28px; }
 }
 @media (min-width: 900px) {

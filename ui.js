@@ -96,11 +96,12 @@ function formatFileSize(size){
 // Notifications remain visible without covering the keyboard-focused control.
 function keepToastClearOfFocus(){
  const notice=document.querySelector('#toast'),focused=document.activeElement;
- if(!notice||getComputedStyle(notice).display==='none'||!focused||notice.contains(focused))return;
+ if(!notice||getComputedStyle(notice).display==='none')return;
  notice.style.top='';notice.style.bottom='';
+ if(!focused||focused===document.body||focused===document.documentElement||notice.contains(focused))return;
  const target=focused.getBoundingClientRect(),rect=notice.getBoundingClientRect();
  const overlaps=(top,bottom)=>target.left<rect.right&&target.right>rect.left&&target.top<bottom&&target.bottom>top;
- if(overlaps(rect.top,rect.bottom)&&!overlaps(16,16+rect.height)){
-  notice.style.top='16px';notice.style.bottom='auto';
+ if(overlaps(rect.top,rect.bottom)){
+  notice.style.top=Math.max(rect.top,target.bottom+8)+'px';
  }
 }
