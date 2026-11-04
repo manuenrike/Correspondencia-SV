@@ -25,7 +25,7 @@ function toast(t){
  const target=$('#toast');target.className='toast-'+type;target.innerHTML=`<span class="toast-symbol">${uiIcon(icon)}</span><div class="toast-copy"><b>${title}</b><span>${esc(t)}</span></div><button type="button" aria-label="Cerrar notificación" onclick="document.querySelector('#toast').style.display='none'">×</button>`;target.style.display='flex';keepToastClearOfFocus();
  toastTimer=setTimeout(()=>target.style.display='none',5000);
 }
-function session(){ $('#session').innerHTML=db.institutions.filter(i=>i.active).map(i=>`<option value="${i.id}" ${i.id===active?'selected':''}>${esc(i.name)}</option>`).join('');const officeEl=$('#officeName');if(officeEl)officeEl.textContent=inst(active)?.name;refreshSessionUser(); }
+function session(){ $('#session').innerHTML=db.institutions.filter(i=>i.active).map(i=>`<option value="${i.id}" ${i.id===active?'selected':''}>${esc(i.name)}</option>`).join('');$('#officeName').textContent=inst(active)?.name;refreshSessionUser(); }
 $('#session').onchange=e=>{active=e.target.value;localStorage.setItem('csv-active',active);session();resetTrayFilters();render()};
 $$('#appSidebar nav [data-page]').forEach(b=>b.onclick=()=>{page=b.dataset.page;resetTrayFilters();render()});
 function status(r){if(r.status==='rejected')return'Rechazado';if(r.status==='accepted')return'Recibido';return isWindowSender(r)?'Enviado':'Pendiente de recepción'}
