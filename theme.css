@@ -62,6 +62,10 @@ p { color: var(--color-secondary); }
 .sidebar__status { border-top: 1px solid var(--color-border); color: var(--color-secondary); }
 .online { background: var(--color-success); }
 .app-header { background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
+.shared-storage-status { color: var(--color-secondary); }
+.shared-storage-status[data-state=saved] { color: var(--color-success); }
+.shared-storage-status[data-state=error] { color: var(--color-danger); }
+.shared-import-notice { background: var(--color-primary-soft); border: 1px solid var(--color-border); }
 .app-header__root, .header-divider { color: var(--color-muted); }
 .context-pill { color: var(--color-secondary); }
 .context-pill > span { background: var(--color-primary); }

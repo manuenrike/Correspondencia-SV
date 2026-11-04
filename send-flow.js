@@ -33,7 +33,7 @@ function mountSendFlow(kind){
  stepper.innerHTML=labels.map((label,index)=>`<button type="button" data-step="${index}" ${index===2?'disabled':''}><span>${index+1}</span>${label}</button>`).join('');
  const footer=form.querySelector(':scope > .form-actions');footer.className='form-actions send-footer';
  footer.innerHTML=`<span class="send-save-status" role="status" aria-live="polite">${uiIcon('check')} Guardado automático</span><button type="button" class="btn" data-save>Guardar borrador</button><button type="button" class="btn" data-back>Atrás</button><button type="submit" class="btn primary" data-next>Continuar ${uiIcon('arrow')}</button>`;
- footer.querySelector('[data-save]').onclick=()=>storeDraft();
+ footer.querySelector('[data-save]').onclick=async()=>{storeDraft();try{await sharedStorage.flush()}catch(error){toast(error.message)}};
  const originalSubmit=form.onsubmit;
  const resumeReview=Number(editing.sendStep)===2;
  let current=Math.min(1,Math.max(0,Number(editing.sendStep)||0));
