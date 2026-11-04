@@ -146,4 +146,5 @@ async function run(playwright,executablePath){
  try{await serverTests(env);await browserTests(env,playwright,executablePath);return 'PASS: shared persistence across independent browsers'}finally{await env.close()}
 }
 module.exports=run;
+module.exports.browserTests=browserTests;
 if(require.main===module)run(require('playwright'),process.env.BROWSER_PATH).then(console.log).catch(error=>{console.error(error);process.exitCode=1});

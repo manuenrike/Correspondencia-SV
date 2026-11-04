@@ -49,3 +49,9 @@ pnpm build
 `tests/shared-storage.cjs` utiliza el emulador Postgres de Netlify y dos perfiles aislados. Comprueba transacciones, conflictos, idempotencia, validación, transferencia mayor de 6 MB, PDF/QR, recepción, respuestas, borradores simultáneos, cola persistente tras recarga sin red, catálogos compartidos e importación local. El adaptador de archivos en esas pruebas es en memoria y reproduce el contrato de Blobs; la integración real con Blobs debe verificarse además en un despliegue Netlify.
 
 El emulador PGlite mantiene una sola sesión embebida; la conexión de las pruebas se serializa para respetar esa limitación. En producción las transacciones se ejecutan con sesiones Postgres y bloqueo de fila, además de una comprobación explícita de versión. Las pruebas locales no sustituyen la verificación del plan, las migraciones y los permisos de almacenamiento de la cuenta Netlify.
+
+## Verificación real del despliegue — 4 de noviembre de 2026
+
+La [vista previa del PR 7](https://deploy-preview-7--brilliant-sprinkles-c42b60.netlify.app/) se desplegó correctamente. La función respondió con versión inicial 0; al abrir la aplicación se inicializó el catálogo compartido. Se ejecutó `browserTests` contra esa URL con dos perfiles aislados, utilizando la base Postgres y Blobs reales de Netlify: envío, PDF original y QR, recepción desde otro equipo, respuesta visible en el primero, borradores simultáneos, catálogo de usuarios actualizado, reintento tras desconexión/recarga, importación local y transferencia de un PDF de más de 7 MB. El resultado fue aprobado, sin errores JavaScript capturados. Los registros creados son datos de prueba de la vista previa.
+
+También aprobaron las ocho suites de regresión anteriores. La compilación solo publica los archivos del navegador. La configuración de la demo no incorpora autenticación institucional real ni cambia el plan o los medios de pago de Netlify.
