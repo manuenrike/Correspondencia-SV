@@ -59,8 +59,6 @@ p { color: var(--color-secondary); }
 #appSidebar nav button.active { color: var(--color-primary-hover); background: var(--color-primary-soft); font-weight: 600; }
 #appSidebar nav i { background: var(--color-surface-muted); color: var(--color-secondary); }
 #appSidebar nav button.active i { color: var(--color-primary-hover); background: var(--color-surface); }
-.sidebar__backup { color: var(--color-secondary); }
-.sidebar__backup:hover { background: var(--color-canvas); color: var(--color-ink); }
 .sidebar__status { border-top: 1px solid var(--color-border); color: var(--color-secondary); }
 .online { background: var(--color-success); }
 .app-header { background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
@@ -105,7 +103,7 @@ button:disabled, select:disabled { opacity: .6; box-shadow: none; }
 .stat { background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--shadow-surface); }
 .stat__label { color: var(--color-secondary); }
 .stat-icon { color: var(--color-muted); }
-.stat:nth-child(2) .stat-icon { color: var(--color-warning); }
+.stat:nth-child(2) .stat-icon { color: var(--color-primary); }
 .stat:nth-child(3) .stat-icon { color: var(--color-success); }
 .stat small { color: var(--color-secondary); }
 .welcome { background: var(--color-surface); border: 1px solid var(--color-border); }

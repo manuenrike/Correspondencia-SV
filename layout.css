@@ -49,7 +49,6 @@ a { text-decoration: none; }
 .nav-symbol svg { width: 18px; height: 18px; }
 #appSidebar nav i { margin-left: auto; min-width: 22px; text-align: center; font-style: normal; font-size: var(--text-caption); padding: 1px 5px; border-radius: 5px; }
 .sidebar-bottom { margin-top: auto; padding-top: 24px; }
-.sidebar__backup { display: flex; align-items: center; gap: var(--space-3); min-height: 44px; padding: 10px 12px; width: 100%; text-align: left; font-size: var(--text-caption); border-radius: var(--radius-control); }
 .sidebar__status { display: flex; align-items: flex-start; gap: var(--space-2); font-size: var(--text-caption); margin: 20px 12px 0; padding-top: 20px; }
 .sidebar__status small { display: block; font-size: 10px; margin-top: 3px; }
 .online { width: 6px; height: 6px; display: inline-block; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
