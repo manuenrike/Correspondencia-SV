@@ -32,7 +32,7 @@ async function run(playwright,executablePath){
   assert.equal(await tab.locator('#sessionUser').inputValue(),key);
   await tab.keyboard.press('Escape');
   assert.equal(await trigger.evaluate(e=>e===document.activeElement),true);
-  assert.equal(await trigger.getAttribute('aria-expanded'),'false');
+  await tab.waitForFunction(()=>document.querySelector('#accountMenu summary').getAttribute('aria-expanded')==='false');
   assert.equal(await trigger.evaluate(e=>getComputedStyle(e).outlineStyle),'solid');
   await tab.keyboard.press('Space');await tab.waitForFunction(()=>document.querySelector('#accountMenu').open);
   const client=await tab.context().newCDPSession(tab);
