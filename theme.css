@@ -69,7 +69,7 @@ p { color: var(--color-secondary); }
 .account-identity small, .account-menu summary > svg { color: var(--color-secondary); }
 .account-popover { background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--shadow-popover); animation: surface-enter 180ms ease-out; }
 .account-popover-heading small, .account-demo { color: var(--color-secondary); }
-.account-menu.sidebar-account > summary { color: var(--color-ink); background: transparent; border: 1px solid transparent; transition: background-color var(--motion-fast),border-color var(--motion-fast); }
+.account-menu.sidebar-account > summary { color: var(--color-ink); background: var(--color-surface); border: 1px solid var(--color-border); transition: background-color var(--motion-fast),border-color var(--motion-fast); }
 .sidebar-account > summary:hover { background: var(--color-canvas); border-color: var(--color-border); }
 .sidebar-account > summary:active { background: var(--color-surface-muted); }
 .sidebar-account[open] > summary { background: var(--color-primary-soft); border-color: var(--color-border); }
@@ -77,6 +77,9 @@ p { color: var(--color-secondary); }
 .sidebar-account__institution-icon { background: var(--color-primary); }
 .sidebar-account__inst b, .sidebar-account .account-identity small, .sidebar-account .account-chevron, .context-current dt { color: var(--color-secondary); }
 .sidebar-account .avatar { color: var(--color-primary-hover); background: var(--color-primary-soft); border-color: var(--color-border); }
+.sidebar-account .account-identity > span { color: var(--color-secondary); }
+.sidebar-account .account-identity small { color: var(--color-primary); }
+.context-avatar__dot { background: var(--color-success); border: 2px solid var(--color-surface); }
 .sidebar-account[open] .account-chevron { color: var(--color-primary-hover); }
 .context-current { border-bottom: 1px solid var(--color-border); }
 @media (max-width: 899px) { .sidebar-account .account-popover { box-shadow: none; } }

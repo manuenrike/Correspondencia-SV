@@ -86,9 +86,9 @@ function refreshAccountPresentation(entry){
  if(name)name.textContent=entry?.user.name||'Sin usuario activo';
  if(office)office.textContent=entry?.window.name||'Selecciona un usuario';
  if(institution)institution.textContent=inst(active)?.name||'Selecciona institución';
- for(const [source,id] of [[institution,'contextInstitutionFull'],[name,'contextUserFull'],[office,'contextOfficeFull']]){
-  if(!source)continue;source.title=source.textContent;
-  const full=document.getElementById(id);if(full)full.textContent=source.textContent;
- }
+ for(const source of [institution,name,office])if(source)source.title=source.textContent;
+ const institutionSelect=$('#session'),userSelect=$('#sessionUser');
+ if(institutionSelect)institutionSelect.title=institution?.textContent||'';
+ if(userSelect)userSelect.title=[name?.textContent,office?.textContent].filter(Boolean).join(' · ');
 }
 document.addEventListener('click',event=>{const menu=$('#accountMenu');if(menu?.open&&!menu.contains(event.target))menu.open=false});

@@ -57,10 +57,13 @@ a { text-decoration: none; }
 .sidebar-account__institution-copy { display: flex; flex: 1; flex-direction: column; gap: var(--space-1); min-width: 0; }
 .sidebar-account__inst b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--text-small); font-weight: 500; line-height: 1.5; }
 .sidebar-account__user { display: flex; align-items: center; gap: var(--space-2); min-width: 0; width: 100%; }
-.sidebar-account__user .avatar { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 26px; width: 26px; height: 26px; border-radius: 50%; font-size: var(--text-caption); font-weight: 600; }
+.context-avatar { position: relative; display: inline-flex; flex: 0 0 32px; }
+.sidebar-account__user .avatar { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 32px; width: 32px; height: 32px; border-radius: 9px; font-size: var(--text-caption); font-weight: 600; }
+.context-avatar__dot { position: absolute; right: -3px; bottom: -3px; width: 10px; height: 10px; border-radius: 50%; }
 .sidebar-account .account-identity { display: flex; flex: 1; flex-direction: column; gap: 0; min-width: 0; }
-.sidebar-account .account-identity b, .sidebar-account .account-identity small { display: block; max-width: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.5; }
-.sidebar-account .account-identity b { font-size: var(--text-small); font-weight: 500; }
+.sidebar-account .account-identity b, .sidebar-account .account-identity > span, .sidebar-account .account-identity small { display: block; max-width: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.5; }
+.sidebar-account .account-identity b { font-size: var(--text-small); font-weight: 600; }
+.sidebar-account .account-identity > span { font-size: var(--text-caption); font-weight: 400; }
 .sidebar-account .account-identity small { font-size: var(--text-caption); font-weight: 400; }
 .sidebar-account .account-chevron { flex: 0 0 18px; width: 18px; height: 18px; margin-left: auto; transition: transform var(--motion-fast); }
 .sidebar-account[open] .account-chevron { transform: rotate(180deg); }

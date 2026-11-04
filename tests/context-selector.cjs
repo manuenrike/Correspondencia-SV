@@ -19,12 +19,14 @@ async function run(playwright,executablePath){
   await tab.locator('#session').selectOption('I4');
   const institution='Alcaldía de San Salvador Centro';
   assert.equal(await tab.locator('#activeInstitutionLabel').textContent(),institution);
-  assert.equal(await tab.locator('#contextInstitutionFull').textContent(),institution);
+  assert.equal(await tab.locator('#session').getAttribute('title'),institution);
+  assert.equal(await panel.locator('select').count(),2);
+  assert.equal(await panel.locator('dl,.account-popover-heading').count(),0);
   assert.equal(await tab.locator('#activeInstitutionLabel').getAttribute('title'),institution);
   const key=await tab.evaluate(()=>availableSessionUsers().find(entry=>entry.window.id==='V42').key);
   await tab.locator('#sessionUser').selectOption(key);
   assert.equal(await tab.locator('#accountOffice').textContent(),'Atención ciudadana');
-  assert.equal(await tab.locator('#contextOfficeFull').textContent(),'Atención ciudadana');
+  assert.match(await tab.locator('#sessionUser').getAttribute('title'),/Atención ciudadana/);
   assert.equal(await tab.evaluate(()=>localStorage.getItem('csv-user-I4')),key);
   await tab.locator('#session').selectOption('I1');await tab.locator('#session').selectOption('I4');
   assert.equal(await tab.locator('#sessionUser').inputValue(),key);
@@ -81,7 +83,7 @@ async function run(playwright,executablePath){
    entry.user.name='María Alejandra Hernández de la Coordinación Institucional';
    entry.window.name='Ventanilla de correspondencia y seguimiento de documentación institucional';session();
   },longName);
-  await openContext();assert.equal(await tab.locator('#contextInstitutionFull').textContent(),longName);
+  await openContext();assert.equal(await tab.locator('#session').getAttribute('title'),longName);
   assert.equal(await tab.locator('#activeInstitutionLabel').getAttribute('title'),longName);
   assert.equal(await tab.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   assert.equal(await trigger.evaluate(e=>e.scrollWidth>e.clientWidth+1),false);
