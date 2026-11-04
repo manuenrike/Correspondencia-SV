@@ -27,7 +27,6 @@
    closeMenu();document.querySelector('#accountMenu').open=true;
    queueMicrotask(()=>document.querySelector('#session').focus());return;
   }
-  if(event.target.closest('[data-ui-backups]')){closeMenu();showBackups();return}
   const action=event.target.closest('[data-ui-page]');
   if(action){resetTrayFilters();page=action.dataset.uiPage;box=action.dataset.uiBox||'all';filter=action.dataset.uiFilter||'';render();document.querySelector('#main').focus({preventScroll:true})}
  });

@@ -22,13 +22,11 @@ El [sistema visual Modern Institutional SaaS](docs/design-system.md) utiliza sup
 
 El envío se organiza mediante `send-flow.js` en tres pasos: Información, Destino y documentos, y Revisión. Cada paso valida sus campos; la correspondencia ciudadana también verifica identidad y descargo. Puedes retroceder sin perder datos o cerrar la ventana; el guardado del borrador es automático. El borrador conserva el paso actual. La verificación de identidad muestra un indicador de consulta y descarta resultados pendientes si se modifica el número o se cierra el formulario. El QR se añade únicamente al confirmar el envío
 
-## Respaldo en ficheros locales
+## Guardado local automático
 
-Pulsa **Respaldo** en el encabezado y luego **Conectar carpeta**. Selecciona una carpeta exclusiva y autoriza la escritura. El sistema guarda automáticamente `informacion.json` y una subcarpeta `documentos` con todos los PDF, incluyendo originales y copias con QR. También incluye borradores y respuestas pendientes. Puedes usar **Guardar ahora** y esperar el estado **Respaldo guardado** antes de cerrar
+Las nuevas correspondencias y los borradores se guardan automáticamente en este navegador. Los metadatos se conservan en localStorage y los documentos PDF en IndexedDB. Los accesos de «Respaldos y documentos» se retiraron del menú lateral y del selector de cuenta.
 
-El navegador puede pedir reautorizar la carpeta después de volver a abrir el HTML. Usa **Respaldo → Conectar carpeta** o **Guardar ahora** para conceder el permiso. El guardado interno del navegador continúa funcionando aunque la carpeta esté desconectada
-
-Para recuperar los datos en otro equipo o navegador, copia toda la carpeta y usa **Respaldo → Seleccionar respaldo para restaurar**. Confirma la sustitución de los datos actuales. Conserva juntos `informacion.json` y `documentos`; el JSON por sí solo no contiene los PDF. Esta función requiere Chrome o Edge con soporte para acceso a carpetas locales
+Los datos pertenecen al navegador y al origen del sitio: no se sincronizan con otros equipos. Conserva los datos del navegador para mantener tus expedientes y documentos. El módulo de respaldo existente se conserva para compatibilidad, sin accesos visibles en la navegación.
 
 Incluye correspondencia institucional y ciudadana, borradores automáticos, directorio de instituciones, ventanillas y usuarios, búsqueda instantánea, filtros, documentos PDF, revisión, recepción, rechazo justificado, conversación y seguimiento con fechas
 
