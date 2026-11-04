@@ -1,6 +1,6 @@
 ﻿# Correspondencia SV
 
-Abre `index.html` en Edge o Chrome para usar la aplicación sin instalación
+El sitio de Netlify admite almacenamiento compartido de correspondencias y PDF entre equipos. La [guía de persistencia compartida](docs/shared-persistence.md) describe configuración, importación de datos anteriores y verificaciones. Abrir `index.html` directamente en Edge o Chrome mantiene el modo local sin instalación.
 
 ## Publicación en Hostinger mediante GitHub
 
@@ -23,6 +23,10 @@ El [sistema visual Modern Institutional SaaS](docs/design-system.md) utiliza sup
 El envío se organiza mediante `send-flow.js` en tres pasos: Información, Destino y documentos, y Revisión. Cada paso valida sus campos; la correspondencia ciudadana también verifica identidad y descargo. Puedes retroceder sin perder datos o cerrar la ventana; el guardado del borrador es automático. El borrador conserva el paso actual. La verificación de identidad muestra un indicador de consulta y descarta resultados pendientes si se modifica el número o se cierra el formulario. El QR se añade únicamente al confirmar el envío
 
 ## Guardado local automático
+
+En el despliegue Netlify, la información confirmada se guarda en el servidor y se comparte entre navegadores. El estado del encabezado distingue guardado confirmado, cambios pendientes y conflictos. Las correspondencias conservan su separación visual por institución y ventanilla. Si había datos en ese navegador antes de activar el modo compartido, utiliza **Compartir datos de este navegador** para incorporarlos con sus PDF.
+
+Los párrafos siguientes describen el modo local al abrir el HTML o alojar los archivos raíz en otro host estático.
 
 Las nuevas correspondencias y los borradores se guardan automáticamente en este navegador. Los metadatos se conservan en localStorage y los documentos PDF en IndexedDB. Los accesos de «Respaldos y documentos» se retiraron del menú lateral y del selector de cuenta.
 
