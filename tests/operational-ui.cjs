@@ -128,10 +128,10 @@ async function run(playwright,executablePath){
   assert.equal(await tab.locator('[name=identity]').evaluate(e=>e===document.activeElement),true);
   assert.ok(await tab.locator('[name=subject]').getAttribute('aria-describedby'));
   await tab.locator('[name=subject]').fill('Borrador con ayuda accesible');
-  await tab.locator('[data-save]').click();
-  assert.match(await tab.locator('.send-save-status').innerText(),/Borrador guardado/);
+  await tab.waitForFunction(()=>document.querySelector('.send-save-status').dataset.state==='saved');
+  assert.equal(await tab.locator('.send-save-status').isVisible(),false);
   await tab.locator('[data-next]').focus();
-  await tab.evaluate(()=>toast('Borrador guardado para probar el foco'));
+  await tab.evaluate(()=>toast('Notificacion para probar el foco'));
   const focusClear=()=>tab.evaluate(()=>{
    const focus=document.activeElement.getBoundingClientRect(),notice=document.querySelector('#toast').getBoundingClientRect();
    return focus.right<=notice.left||focus.left>=notice.right||focus.bottom<=notice.top||focus.top>=notice.bottom;

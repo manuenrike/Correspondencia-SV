@@ -18,7 +18,7 @@ function mountSendFlow(kind){
  const form=$('#correspondenceForm'),dialog=form.closest('.dialog');
  dialog.classList.add('is-composer');
  form.noValidate=true;
- form.insertAdjacentHTML('afterbegin','<p class="form-requirements hint">Los campos con <span class="required-mark">*</span> son obligatorios. Los cambios se guardan automáticamente.</p>');
+ form.insertAdjacentHTML('afterbegin','<p class="form-requirements hint">Los campos con <span class="required-mark">*</span> son obligatorios.</p>');
  form.querySelectorAll('[required]').forEach((control,index)=>{
   if(!control.id)control.id='send-field-'+index;
   const label=control.labels?.[0];
@@ -32,8 +32,7 @@ function mountSendFlow(kind){
  const stepper=dialog.querySelector('.stepbar');stepper.className='send-stepper';stepper.setAttribute('aria-label','Progreso del envío');
  stepper.innerHTML=labels.map((label,index)=>`<button type="button" data-step="${index}" ${index===2?'disabled':''}><span>${index+1}</span>${label}</button>`).join('');
  const footer=form.querySelector(':scope > .form-actions');footer.className='form-actions send-footer';
- footer.innerHTML=`<span class="send-save-status" role="status" aria-live="polite">${uiIcon('check')} Guardado automático</span><button type="button" class="btn" data-save>Guardar borrador</button><button type="button" class="btn" data-back>Atrás</button><button type="submit" class="btn primary" data-next>Continuar ${uiIcon('arrow')}</button>`;
- footer.querySelector('[data-save]').onclick=async()=>{storeDraft();try{await sharedStorage.flush()}catch(error){toast(error.message)}};
+ footer.innerHTML=`<span class="send-save-status" role="status" aria-live="polite" hidden></span><button type="button" class="btn" data-back>Atrás</button><button type="submit" class="btn primary" data-next>Continuar ${uiIcon('arrow')}</button>`;
  const originalSubmit=form.onsubmit;
  const resumeReview=Number(editing.sendStep)===2;
  let current=Math.min(1,Math.max(0,Number(editing.sendStep)||0));

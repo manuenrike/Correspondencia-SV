@@ -293,6 +293,7 @@ input[type=file]::file-selector-button { min-height: 36px; padding: 7px 12px; bo
 .attachment-upload { display: grid; grid-template-columns: 36px minmax(0,1fr); gap: var(--space-3); align-items: center; text-align: left; }
 .attachment-upload__copy { min-width: 0; }
 .attachment-upload input { grid-column: 1/-1; margin: 0; }
+.attachment-upload > .field-error { grid-column: 1/-1; min-width: 0; width: 100%; text-align: left; }
 .upload-icon { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: var(--radius-control); }
 .file-row { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-3); padding: var(--space-3); margin-top: 10px; border-radius: var(--radius-control); font-size: var(--text-caption); }
 .file-row > span:first-child { flex: 1 1 160px; min-width: 0; overflow-wrap: anywhere; }

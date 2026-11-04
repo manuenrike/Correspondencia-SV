@@ -76,9 +76,10 @@ function correspondenceMetadata(record){
 function setDraftSaveStatus(state){
  if(state==='saved'&&sharedStorage.enabled&&!sharedStorage.isSynced())state='saving';
  const target=document.querySelector('.send-save-status');if(!target)return;
+ target.dataset.state=state;target.hidden=state!=='error';
+ if(state!=='error'){target.textContent='';return}
  target.dataset.state=state;target.setAttribute('role','status');target.setAttribute('aria-live','polite');
- const labels={saving:sharedStorage.enabled?'Guardando en línea…':'Guardando cambios…',saved:sharedStorage.enabled?'Borrador guardado en línea':'Borrador guardado',error:'No se pudo guardar'};
- target.innerHTML=uiIcon(state==='error'?'alert':state==='saving'?'clock':'check')+'<span>'+labels[state]+'</span>';
+ target.innerHTML=uiIcon('alert')+'<span>No se pudo guardar</span>';
 }
 
 // Shared metric composition.

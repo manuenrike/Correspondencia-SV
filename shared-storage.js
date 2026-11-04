@@ -12,7 +12,7 @@ const sharedStorage=(()=>{
  function setStatus(state,message){
   if(!enabled)return;
   const status=document.getElementById('sharedStorageStatus');
-  if(status){status.hidden=false;status.dataset.state=state;status.querySelector('span').textContent=message;const button=status.querySelector('button');button.hidden=state==='saved'||state==='loading';button.textContent=blocked?'Revisar':'Reintentar';button.onclick=()=>!ready?location.reload():blocked?reviewConflict():flush().catch(reportError)}
+  if(status){status.hidden=state!=='error';status.dataset.state=state;status.querySelector('span').textContent=state==='error'?message:'';const button=status.querySelector('button');button.hidden=state!=='error';button.textContent=blocked?'Revisar':'Reintentar';button.onclick=()=>!ready?location.reload():blocked?reviewConflict():flush().catch(reportError)}
   if(document.querySelector('.send-save-status'))setDraftSaveStatus(state==='saved'?'saved':state==='error'?'error':'saving');
  }
  function persistOutbox(){
