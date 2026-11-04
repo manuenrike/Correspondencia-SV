@@ -32,7 +32,7 @@ function eventMarkup(event,record){
 function canRejectCorrespondence(record){
   return !!record&&canAccessCorrespondence(record)&&(record.status==='pending'?isWindowRecipient(record):record.kind==='institucional'&&record.status==='accepted');
 }
-function responseRequirementMarkup(value){return value?'<span class="badge b-purple">Requiere respuesta</span>':''}
+function responseRequirementMarkup(value){return value?uiChip('Requiere respuesta','b-purple','reply'):''}
 function registerDecision(record,action,reason=''){
   const actor=currentActor();
   if(action==='accepted'?(!isWindowRecipient(record)||record.status!=='pending'):!canRejectCorrespondence(record))return null;
