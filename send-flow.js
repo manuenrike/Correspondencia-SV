@@ -86,5 +86,9 @@ function refreshAccountPresentation(entry){
  if(name)name.textContent=entry?.user.name||'Sin usuario activo';
  if(office)office.textContent=entry?.window.name||'Selecciona un usuario';
  if(institution)institution.textContent=inst(active)?.name||'Selecciona institución';
+ for(const [source,id] of [[institution,'contextInstitutionFull'],[name,'contextUserFull'],[office,'contextOfficeFull']]){
+  if(!source)continue;source.title=source.textContent;
+  const full=document.getElementById(id);if(full)full.textContent=source.textContent;
+ }
 }
 document.addEventListener('click',event=>{const menu=$('#accountMenu');if(menu?.open&&!menu.contains(event.target))menu.open=false});

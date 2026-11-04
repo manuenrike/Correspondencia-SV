@@ -23,9 +23,12 @@ async function run(playwright,executablePath){
    assert.equal(await tab.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   }
   await tab.getByRole('button',{name:'Abrir menú de navegación'}).click();
-  await tab.getByRole('button',{name:'Cambiar institución y ventanilla'}).click();
+  await tab.locator('#accountMenu summary').click();
   assert.equal(await tab.locator('#accountMenu').evaluate(e=>e.open),true);
-  assert.equal(await tab.locator('#mobileNavigation').evaluate(e=>e.open),false);
+  assert.equal(await tab.locator('#mobileNavigation').evaluate(e=>e.open),true);
+  await tab.keyboard.press('Escape');
+  assert.equal(await tab.locator('#accountMenu').evaluate(e=>e.open),false);
+  assert.equal(await tab.locator('#mobileNavigation').evaluate(e=>e.open),true);
   await tab.keyboard.press('Escape');
   await tab.getByRole('button',{name:'Nueva correspondencia'}).click();
   await tab.locator('[data-next]').click();
