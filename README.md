@@ -1,6 +1,6 @@
 ﻿# Correspondencia SV
 
-Abre `index.html` en Edge o Chrome para usar la aplicación sin instalación
+El sitio de Netlify admite almacenamiento compartido de correspondencias y PDF entre equipos. La [guía de persistencia compartida](docs/shared-persistence.md) describe configuración, importación de datos anteriores y verificaciones. Abrir `index.html` directamente en Edge o Chrome mantiene el modo local sin instalación.
 
 ## Publicación en Hostinger mediante GitHub
 
@@ -14,7 +14,7 @@ Tras publicar, verifica creación, revisión, envío, PDF con QR y cierre de mod
 
 La vista **Por atender** reúne recepciones pendientes dirigidas a la ventanilla activa y respuestas institucionales requeridas por la contraparte. Los envíos que esperan recepción o respuesta de otra ventanilla permanecen en su bandeja habitual. Los filtros combinan dirección, búsqueda, estado, fechas de envío, prioridad, tipo de documento, institución, requerimiento de respuesta y orden. **Limpiar filtros** restablece los criterios de la vista. El dashboard muestra la actividad según las fechas reales del historial.
 
-La [auditoría de mejoras operativas](docs/operational-ux-audit.md) documenta el uso de UI UX Pro Max, las reglas de «Por atender», archivos, verificaciones y límites. Con Node, Playwright disponible y un navegador instalado, `node tests/run.cjs` ejecuta las seis suites. `BROWSER_PATH` permite indicar el ejecutable; no se requieren estas herramientas para usar o publicar la aplicación.
+La [auditoría de mejoras operativas](docs/operational-ux-audit.md) documenta el uso de UI UX Pro Max, las reglas de «Por atender», archivos, verificaciones y límites. Con Node, Playwright disponible y un navegador instalado, `node tests/run.cjs` ejecuta las ocho suites de regresión; `pnpm test:shared` añade las pruebas de persistencia entre equipos. `BROWSER_PATH` permite indicar el ejecutable.
 
 La interfaz presenta filas de correspondencia fáciles de comparar en escritorio y tarjetas adaptativas en móvil. Cada expediente muestra asunto, dirección, estado, requisito de respuesta, institución, fecha y adjuntos. Borradores, instituciones, ventanillas y usuarios conservan sus tarjetas, filtros y acciones. La navegación móvil abre un menú accesible; los formularios y modales se adaptan a la pantalla y respetan la preferencia de movimiento reducido.
 
@@ -22,13 +22,15 @@ El [sistema visual Modern Institutional SaaS](docs/design-system.md) utiliza sup
 
 El envío se organiza mediante `send-flow.js` en tres pasos: Información, Destino y documentos, y Revisión. Cada paso valida sus campos; la correspondencia ciudadana también verifica identidad y descargo. Puedes retroceder sin perder datos o cerrar la ventana; el guardado del borrador es automático. El borrador conserva el paso actual. La verificación de identidad muestra un indicador de consulta y descarta resultados pendientes si se modifica el número o se cierra el formulario. El QR se añade únicamente al confirmar el envío
 
-## Respaldo en ficheros locales
+## Guardado local automático
 
-Pulsa **Respaldo** en el encabezado y luego **Conectar carpeta**. Selecciona una carpeta exclusiva y autoriza la escritura. El sistema guarda automáticamente `informacion.json` y una subcarpeta `documentos` con todos los PDF, incluyendo originales y copias con QR. También incluye borradores y respuestas pendientes. Puedes usar **Guardar ahora** y esperar el estado **Respaldo guardado** antes de cerrar
+En el despliegue Netlify, la información confirmada se guarda en el servidor y se comparte entre navegadores. El estado del encabezado distingue guardado confirmado, cambios pendientes y conflictos. Las correspondencias conservan su separación visual por institución y ventanilla. Si había datos en ese navegador antes de activar el modo compartido, utiliza **Compartir datos de este navegador** para incorporarlos con sus PDF.
 
-El navegador puede pedir reautorizar la carpeta después de volver a abrir el HTML. Usa **Respaldo → Conectar carpeta** o **Guardar ahora** para conceder el permiso. El guardado interno del navegador continúa funcionando aunque la carpeta esté desconectada
+Los párrafos siguientes describen el modo local al abrir el HTML o alojar los archivos raíz en otro host estático.
 
-Para recuperar los datos en otro equipo o navegador, copia toda la carpeta y usa **Respaldo → Seleccionar respaldo para restaurar**. Confirma la sustitución de los datos actuales. Conserva juntos `informacion.json` y `documentos`; el JSON por sí solo no contiene los PDF. Esta función requiere Chrome o Edge con soporte para acceso a carpetas locales
+Las nuevas correspondencias y los borradores se guardan automáticamente en este navegador. Los metadatos se conservan en localStorage y los documentos PDF en IndexedDB. Los accesos de «Respaldos y documentos» se retiraron del menú lateral y del selector de cuenta.
+
+Los datos pertenecen al navegador y al origen del sitio: no se sincronizan con otros equipos. Conserva los datos del navegador para mantener tus expedientes y documentos. El módulo de respaldo existente se conserva para compatibilidad, sin accesos visibles en la navegación.
 
 Incluye correspondencia institucional y ciudadana, borradores automáticos, directorio de instituciones, ventanillas y usuarios, búsqueda instantánea, filtros, documentos PDF, revisión, recepción, rechazo justificado, conversación y seguimiento con fechas
 

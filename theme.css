@@ -59,11 +59,13 @@ p { color: var(--color-secondary); }
 #appSidebar nav button.active { color: var(--color-primary-hover); background: var(--color-primary-soft); font-weight: 600; }
 #appSidebar nav i { background: var(--color-surface-muted); color: var(--color-secondary); }
 #appSidebar nav button.active i { color: var(--color-primary-hover); background: var(--color-surface); }
-.sidebar__backup { color: var(--color-secondary); }
-.sidebar__backup:hover { background: var(--color-canvas); color: var(--color-ink); }
 .sidebar__status { border-top: 1px solid var(--color-border); color: var(--color-secondary); }
 .online { background: var(--color-success); }
 .app-header { background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
+.shared-storage-status { color: var(--color-secondary); }
+.shared-storage-status[data-state=saved] { color: var(--color-success); }
+.shared-storage-status[data-state=error] { color: var(--color-danger); }
+.shared-import-notice { background: var(--color-primary-soft); border: 1px solid var(--color-border); }
 .app-header__root, .header-divider { color: var(--color-muted); }
 .context-pill { color: var(--color-secondary); }
 .context-pill > span { background: var(--color-primary); }
@@ -71,6 +73,20 @@ p { color: var(--color-secondary); }
 .account-identity small, .account-menu summary > svg { color: var(--color-secondary); }
 .account-popover { background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--shadow-popover); animation: surface-enter 180ms ease-out; }
 .account-popover-heading small, .account-demo { color: var(--color-secondary); }
+.account-menu.sidebar-account > summary { color: var(--color-ink); background: var(--color-surface); border: 1px solid var(--color-border); transition: background-color var(--motion-fast),border-color var(--motion-fast); }
+.sidebar-account > summary:hover { background: var(--color-canvas); border-color: var(--color-border); }
+.sidebar-account > summary:active { background: var(--color-surface-muted); }
+.sidebar-account[open] > summary { background: var(--color-primary-soft); border-color: var(--color-border); }
+.sidebar-account > summary:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
+.sidebar-account__institution-icon { background: var(--color-primary); }
+.sidebar-account__inst b, .sidebar-account .account-identity small, .sidebar-account .account-chevron, .context-current dt { color: var(--color-secondary); }
+.sidebar-account .avatar { color: var(--color-primary-hover); background: var(--color-primary-soft); border-color: var(--color-border); }
+.sidebar-account .account-identity > span { color: var(--color-secondary); }
+.sidebar-account .account-identity small { color: var(--color-primary); }
+.context-avatar__dot { background: var(--color-success); border: 2px solid var(--color-surface); }
+.sidebar-account[open] .account-chevron { color: var(--color-primary-hover); }
+.context-current { border-bottom: 1px solid var(--color-border); }
+@media (max-width: 899px) { .sidebar-account .account-popover { box-shadow: none; } }
 .mobile-navigation { background: var(--color-surface); border: 0; border-right: 1px solid var(--color-border); box-shadow: var(--shadow-dialog); }
 .mobile-navigation::backdrop { background: rgb(15 23 42 / .35); }
 .mobile-navigation #appSidebar { border: 0; }
@@ -105,7 +121,7 @@ button:disabled, select:disabled { opacity: .6; box-shadow: none; }
 .stat { background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--shadow-surface); }
 .stat__label { color: var(--color-secondary); }
 .stat-icon { color: var(--color-muted); }
-.stat:nth-child(2) .stat-icon { color: var(--color-warning); }
+.stat:nth-child(2) .stat-icon { color: var(--color-primary); }
 .stat:nth-child(3) .stat-icon { color: var(--color-success); }
 .stat small { color: var(--color-secondary); }
 .welcome { background: var(--color-surface); border: 1px solid var(--color-border); }
@@ -221,7 +237,6 @@ input[type=file]::file-selector-button:hover { background: var(--color-surface-m
 .toast-copy span, #toast > button { color: var(--color-secondary); }
 #toast > button:hover { color: var(--color-ink); background: var(--color-surface-muted); }
 @media (min-width: 900px) {
- .account-menu summary { border-left: 1px solid var(--color-border); }
  .correspondence-card__side { border-top: 0; }
 }
 @media (forced-colors: active) {
@@ -234,7 +249,22 @@ input[type=file]::file-selector-button:hover { background: var(--color-surface-m
 .field :is(input,select,textarea)[aria-invalid=true] { border-color: var(--color-danger); }
 input, select, textarea { font-weight: 400; }
 
-.dialog { scrollbar-color: var(--color-control-border) transparent; }
+/* Shared scrollbars for pages, panels, menus, dialogs and text fields. */
+:root { --scrollbar-surface: var(--color-canvas); }
+#appSidebar, .account-popover, .mobile-navigation, textarea { --scrollbar-surface: var(--color-surface); }
+* { scrollbar-width: thin; scrollbar-color: var(--color-control-border) transparent; }
+@supports selector(::-webkit-scrollbar) {
+ *, .dialog { scrollbar-width: auto; scrollbar-color: auto; }
+ ::-webkit-scrollbar { width: 12px; height: 12px; }
+ ::-webkit-scrollbar-track { margin: var(--space-4); background: transparent; }
+ ::-webkit-scrollbar-thumb { background: var(--color-control-border); border: 3px solid var(--scrollbar-surface); border-radius: var(--radius-dialog); background-clip: padding-box; }
+ ::-webkit-scrollbar-thumb:hover { background-color: var(--color-secondary); }
+ ::-webkit-scrollbar-corner { background: transparent; }
+}
+@media (forced-colors: active) {
+ *, .dialog { scrollbar-color: auto; }
+ ::-webkit-scrollbar-thumb { background: ButtonText; border-color: Canvas; }
+}
 
 .stats--directory .stat:nth-child(2) .stat-icon { color: var(--color-success); }
 .stats--directory .stat:nth-child(3) .stat-icon { color: var(--color-secondary); }

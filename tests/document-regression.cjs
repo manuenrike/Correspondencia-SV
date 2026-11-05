@@ -28,7 +28,18 @@ async function run(playwright,executablePath){
   await tab.locator('[name=subject]').fill('Expediente de prueba documental');
   await tab.locator('[name=requires]').check();await tab.locator('[data-next]').click();
   await tab.locator('#destination').selectOption('I2');await tab.locator('#destinationWindow').selectOption('V21');
+  await tab.locator('[data-next]').click();
+  for(const width of [320,375,768,1024,1440]){
+   await tab.setViewportSize({width,height:900});
+   const error=tab.locator('.attachment-upload > .field-error');
+   assert.match(await error.textContent(),/Adjunta al menos un documento PDF/);
+   assert.equal(await error.evaluate(e=>getComputedStyle(e).gridColumn),'1 / -1');
+   assert.ok(await error.evaluate(e=>e.getBoundingClientRect().width>e.parentElement.clientWidth-60));
+   assert.equal(await tab.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+  }
+  assert.equal(await tab.locator('[data-save]').count(),0);
   await tab.locator('#files').setInputFiles(pdf);await tab.waitForFunction(()=>files.length===1);
+  assert.equal(await tab.locator('.attachment-upload > .field-error').count(),0);
   await tab.getByRole('button',{name:'Ver documento',exact:true}).click();
   await tab.locator('iframe[title="Documento original sin QR del sistema"]').waitFor();
   assert.equal(await tab.evaluate(()=>!!files[0].authenticatedId),false);await tab.keyboard.press('Escape');

@@ -23,9 +23,12 @@ async function run(playwright,executablePath){
    assert.equal(await tab.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   }
   await tab.getByRole('button',{name:'Abrir menú de navegación'}).click();
-  await tab.getByRole('button',{name:'Cambiar institución y ventanilla'}).click();
+  await tab.locator('#accountMenu summary').click();
   assert.equal(await tab.locator('#accountMenu').evaluate(e=>e.open),true);
-  assert.equal(await tab.locator('#mobileNavigation').evaluate(e=>e.open),false);
+  assert.equal(await tab.locator('#mobileNavigation').evaluate(e=>e.open),true);
+  await tab.keyboard.press('Escape');
+  assert.equal(await tab.locator('#accountMenu').evaluate(e=>e.open),false);
+  assert.equal(await tab.locator('#mobileNavigation').evaluate(e=>e.open),true);
   await tab.keyboard.press('Escape');
   await tab.getByRole('button',{name:'Nueva correspondencia'}).click();
   await tab.locator('[data-next]').click();
@@ -35,7 +38,8 @@ async function run(playwright,executablePath){
   assert.deepEqual(unnamed,[]);
   await tab.locator('[name=subject]').fill('Borrador visual');
   await tab.waitForFunction(()=>document.querySelector('.send-save-status')?.dataset.state==='saved');
-  assert.equal(await tab.locator('.send-save-status').textContent(),'Borrador guardado');
+  assert.equal(await tab.locator('.send-save-status').isVisible(),false);
+  assert.equal(await tab.locator('[data-save]').count(),0);
   await tab.keyboard.press('Escape');
   // The operational shortcut includes the citizen reception in Por atender.
   await tab.evaluate(()=>{db.records.push({id:'UI-CITIZEN',kind:'ciudadana',from:'I2',fromWindow:'V21',to:active,toWindow:activeWindowId(),subject:'Pendiente ciudadano',created:now(),status:'pending',files:[],messages:[],events:[]});page='inicio';render()});

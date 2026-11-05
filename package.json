@@ -1,0 +1,20 @@
+{
+  "name": "correspondencia-sv",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "build": "node scripts/build-site.cjs",
+    "test": "node tests/run.cjs",
+    "test:shared": "node tests/shared-storage.cjs"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^11.1.7",
+    "@netlify/database": "^2.0.1"
+  },
+  "devDependencies": {
+    "@netlify/database-dev": "^1.0.1",
+    "pg": "^8.23.1",
+    "playwright": "1.62.1"
+  }
+}

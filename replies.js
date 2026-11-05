@@ -1,7 +1,7 @@
 let savedReplyDrafts=[];
 try{savedReplyDrafts=JSON.parse(localStorage.getItem('correspondencia-sv-reply-drafts')||'[]')}catch{}
 const replyDrafts = new Map(Array.isArray(savedReplyDrafts)?savedReplyDrafts.map(([key,value])=>[key,{...value,busy:false}]):[]);
-function persistReplyDrafts(){localStorage.setItem('correspondencia-sv-reply-drafts',JSON.stringify([...replyDrafts].map(([key,value])=>[key,{...value,busy:false}])));scheduleBackup()}
+function persistReplyDrafts(){localStorage.setItem('correspondencia-sv-reply-drafts',JSON.stringify([...replyDrafts].map(([key,value])=>[key,{...value,busy:false}])));scheduleBackup();sharedStorage.schedule()}
 function correspondenceRequiresReply(record){
   const latest=(record.messages||[]).filter(message=>typeof message.requires==='boolean').at(-1);
   return latest?latest.requires:record.requires===true;
@@ -57,6 +57,7 @@ function bindReplyComposer(record) {
     if(!canReplyToCorrespondence(record))return toast('No se permiten respuestas: la conversación está cerrada, no requiere respuesta o no tienes permiso');
     const actor=currentActor(),requires=form.elements.requires.checked;
     draft.busy=true;refresh();
+    let staged=false;
     try{
       const attachments=draft.files.map(f=>({...f,submittedBy:institution}));
       for(const file of attachments)await authenticatedPDF({...record,from:institution},file);
@@ -67,11 +68,13 @@ function bindReplyComposer(record) {
       record.requires=requires;
       record.messages.push(message);
       record.events.push({text:'Respuesta enviada por '+inst(institution).acronym+(attachments.length?' con '+attachments.length+' documento(s)':'')+' · '+(requires?'Requiere respuesta':'No requiere respuesta · Conversación finalizada'),actor,at});
-      try{save()}catch(error){record.messages.pop();record.events.pop();record.requires=previousRequires;record.initialRequires=previousInitialRequires;throw error}
-      replyDrafts.delete(record.id+':'+institution);persistReplyDrafts();
+      const draftKey=record.id+':'+institution;
+      replyDrafts.delete(draftKey);staged=true;
+      try{save();persistReplyDrafts();await sharedStorage.flush()}
+      catch(error){if(!sharedStorage.enabled){record.messages.pop();record.events.pop();record.requires=previousRequires;record.initialRequires=previousInitialRequires;replyDrafts.set(draftKey,draft)}throw error}
       if($('#replyForm')===form)detail(record.id);
       toast('Respuesta enviada'+(attachments.length?' con documentos adjuntos':''));
-    }catch(error){toast('No se pudo enviar la respuesta: '+error.message)}
+    }catch(error){if(sharedStorage.enabled&&staged&&$('#replyForm')===form)detail(record.id);toast('No se pudo confirmar la respuesta: '+error.message)}
     finally{draft.busy=false;if($('#replyForm')===form)refresh()}
   };
   refresh();
